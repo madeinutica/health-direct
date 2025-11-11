@@ -147,17 +147,17 @@ export default function HomePage() {
               <div className="text-center">
                 <h3 className="text-lg lg:text-xl font-extrabold text-gray-900 mb-2">
                   {currentStep === 'insurance' 
-                    ? 'What is your insurance provider?' 
+                    ? 'Who is your insurance provider?' 
                     : currentStep === 'needs'
-                    ? 'Describe your healthcare needs'
+                    ? 'What healthcare service do you need?'
                     : 'Finding providers for you...'
                   }
                 </h3>
                 <p className="text-sm text-gray-600">
                   {currentStep === 'insurance' 
-                    ? 'e.g., Blue Cross Blue Shield, Medicaid, Excellus' 
+                    ? 'e.g., Blue Cross Blue Shield, Medicaid, Excellus, or "I don\'t have insurance"' 
                     : currentStep === 'needs'
-                    ? 'e.g., I need a primary care doctor for annual checkup'
+                    ? 'e.g., I need a primary care doctor, or I have knee pain'
                     : 'Redirecting to directory...'
                   }
                 </p>
