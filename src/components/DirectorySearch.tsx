@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { MagnifyingGlassIcon, FunnelIcon, MapIcon, ListBulletIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/24/solid'
@@ -126,10 +126,11 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
   const router = useRouter()
   const onSearchResultsRef = useRef(onSearchResults)
   
-  const supabase = createClient(
+  // Memoize supabase client to prevent recreation on every render
+  const supabase = useMemo(() => createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-  )
+  ), [])
 
   // Update the ref when the callback changes
   useEffect(() => {
@@ -282,10 +283,12 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
     } finally {
       setLoading(false)
     }
-  }, [searchQuery, selectedCategory, selectedSpecialty, supabase]) // Removed onSearchResults from dependencies
+  }, [searchQuery, selectedCategory, selectedSpecialty, supabase]) // Include supabase since it's memoized and stable
 
+  // Single useEffect for all data fetching
   useEffect(() => {
     if (initialProviders.length === 0) {
+      console.log('🎯 Fetching providers due to search/filter change')
       fetchProviders()
     }
   }, [fetchProviders, initialProviders.length])
