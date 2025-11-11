@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oneida County Healthcare Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chosen Palette: Calm Harmony (BG: gray-50, Cards: white, Text: gray-700, Accent: sky-600, Pills: sky-100) -->
+    <!-- Application Structure Plan: A dashboard/directory hybrid. Top-level 'Quick Access' buttons for urgent needs (Hospitals, Urgent Care, Crisis) identified from the user's prompt. The main interface features three-way filtering (search, category, location) and a dynamic listing grid. This structure is chosen over a linear list to handle the large data volume (100+ entries) and allow users to self-select their 'task' (e.g., 'find a specialist' vs. 'find nearest urgent care') for maximum usability. -->
+    <!-- Visualization & Content Choices: 1. Directory Data (JSON) -> Goal: Inform/Browse -> Presentation: Interactive card grid (HTML/Tailwind) -> Interaction: Filtered by JS (search, category, location) -> Justification: Handles 100+ entries effectively. 2. Category Counts -> Goal: Overview -> Viz: Donut Chart (Chart.js/Canvas) -> Justification: Shows service landscape at a glance. 3. Location Counts -> Goal: Compare -> Viz: Bar Chart (Chart.js/Canvas) -> Justification: Shows geographic density of services. This combination provides both high-level summary (charts) and detailed drill-down (filtered list). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .filter-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .filter-btn.active {
+            background-color: #0284c7;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700 font-sans leading-normal">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-sky-600">Oneida County Healthcare</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-white">
+        <div class="container mx-auto px-4 py-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Healthcare Directory</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                An interactive guide to medical facilities and specialists in Oneida County. Find hospitals, urgent care, specialists, and more in Utica, Rome, and surrounding areas.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <section id="quick-access" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Quick Access</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <button data-category="Hospital" class="quick-filter-btn group bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ease-in-out text-center hover:bg-sky-50">
+                    <span class="text-5xl mb-2 block">🏥</span>
+                    <span class="text-xl font-semibold text-sky-700 group-hover:text-sky-800">Hospitals</span>
+                </button>
+                <button data-category="Urgent Care" class="quick-filter-btn group bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ease-in-out text-center hover:bg-amber-50">
+                    <span class="text-5xl mb-2 block">🏃</span>
+                    <span class="text-xl font-semibold text-amber-700 group-hover:text-amber-800">Urgent Care</span>
+                </button>
+                <button data-category="Emergency" class="quick-filter-btn group bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ease-in-out text-center hover:bg-red-50">
+                    <span class="text-5xl mb-2 block">🚨</span>
+                    <span class="text-xl font-semibold text-red-700 group-hover:text-red-800">Emergency</span>
+                </button>
+                <button data-category="Mental Health" class="quick-filter-btn group bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ease-in-out text-center hover:bg-teal-50">
+                    <span class="text-5xl mb-2 block">❤️‍🩹</span>
+                    <span class="text-xl font-semibold text-teal-700 group-hover:text-teal-800">Crisis & Mental Health</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="dashboard" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">County Healthcare Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-md self-start sticky top-24">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Find a Provider</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="search-input" class="block text-sm font-medium text-gray-700 mb-1">Search by Name or Specialty</label>
+                            <input type_="text" id="search-input" placeholder="e.g., Cardiology, WellNow, Wynn" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500">
+                        </div>
+                        
+                        <div>
+                            <label for="location-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Location</label>
+                            <select id="location-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500">
+                                <option value="All">All Locations</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Filter by Category</h4>
+                            <div id="category-filters" class="flex flex-wrap gap-2">
+                                <button class="filter-btn active text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="All">All</button>
+                                <button class="filter-btn text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="Hospital">Hospital</button>
+                                <button class="filter-btn text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="Urgent Care">Urgent Care</button>
+                                <button class="filter-btn text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="Specialist">Specialist</button>
+                                <button class="filter-btn text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="Primary Care">Primary Care</button>
+                                <button class="filter-btn text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="Surgery">Surgery</button>
+                                <button class="filter-btn text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="Imaging/Lab">Imaging/Lab</button>
+                                <button class="filter-btn text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="Therapy">Therapy</button>
+                                <button class="filter-btn text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full" data-category="Mental Health">Mental Health</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-center text-gray-800 mb-4">Provider Types</h3>
+                        <p class="text-sm text-center text-gray-600 mb-4">A breakdown of the different healthcare service categories available in the county.</p>
+                        <div class="chart-container">
+                            <canvas id="category-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-center text-gray-800 mb-4">Services by Location</h3>
+                        <p class="text-sm text-center text-gray-600 mb-4">This chart shows the concentration of services in the county's primary locations.</p>
+                        <div class="chart-container">
+                            <canvas id="location-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="listings">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">Directory Results</h2>
+                <span id="listings-count" class="text-lg text-gray-600 font-medium"></span>
+            </div>
+            <div id="listings-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white mt-16 border-t border-gray-200">
+        <div class="container mx-auto px-4 py-8 text-center text-gray-500">
+            <p>&copy; 2025 Oneida County Healthcare Directory. Data compiled for informational purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        const sourceData = {
+          "@context": "https://schema.org",
+          "@type": "MedicalOrganization",
+          "name": "Oneida County Healthcare Provider Directory",
+          "description": "Comprehensive guide to medical facilities and specialists in Oneida County, NY, optimized for AI and voice search: hospitals, urgent care, specialists, primary care.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "New York",
+            "addressLocality": "Oneida County"
+          },
+          "url": "https://example.com/oneida-healthcare-directory",
+          "containsPlace": [
+            {
+              "@type": "Hospital",
+              "name": "Wynn Hospital",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "111 Hospital Drive",
+                "addressLocality": "Utica",
+                "addressRegion": "NY",
+                "postalCode": "13502"
+              },
+              "telephone": "315-917-9966",
+              "parentOrganization": {
+                "@type": "Organization",
+                "name": "Mohawk Valley Health System"
+              },
+              "medicalSpecialty": [
+                "Emergency",
+                "Stroke Care",
+                "Maternity",
+                "Pediatrics",
+                "Cardiology",
+                "Surgery",
+                "Oncology",
+                "Behavioral Health"
+              ],
+              "hasPOS": [
+                {
+                  "@type": "EmergencyService",
+                  "name": "24/7 Emergency Room",
+                  "description": "Level III Trauma Center, 90,000 visits annually"
+                }
+              ],
+              "sameAs": "https://mvhealthsystem.org"
+            },
+            {
+              "@type": "Hospital",
+              "name": "Rome Health Medical Center",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "1500 North James Street",
+                "addressLocality": "Rome",
+                "addressRegion": "NY",
+                "postalCode": "13440"
+              },
+              "telephone": "315-338-7000",
+              "medicalSpecialty": [
+                "Emergency",
+                "Maternity",
+                "Senior Services",
+                "Behavioral Health"
+              ],
+              "hasPOS": [
+                {
+                  "@type": "EmergencyService",
+                  "name": "24/7 Emergency Services"
+                },
+                {
+                  "@type": "HealthAndBeautyBusiness",
+                  "name": "80-bed Skilled Nursing Facility"
+                }
+              ],
+              "sameAs": "https://romehealth.org"
+            },
+            {
+              "@type": "Hospital",
+              "name": "Oneida Health Hospital",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "321 Genesee Street",
+                "addressLocality": "Oneida",
+                "addressRegion": "NY",
+                "postalCode": "13421"
+              },
+              "telephone": "315-363-6000",
+              "parentOrganization": {
+                "@type": "Organization",
+                "name": "Oneida Health"
+              },
+              "medicalSpecialty": [
+                "Emergency",
+                "Critical Care",
+                "Surgery"
+              ],
+              "hasPOS": [
+                {
+                  "@type": "EmergencyService",
+                  "name": "24/7 Emergency Room"
+                },
+                {
+                  "@type": "MedicalProcedure",
+                  "name": "da Vinci Robotic Surgery"
+                }
+              ],
+              "sameAs": "https://oneidahealth.org"
+            },
+            {
+              "@type": "MedicalClinic",
+              "name": "WellNow Urgent Care",
+              "address": [
+                {
+                  "@type": "PostalAddress",
+                  "streetAddress": "230 North Genesee Street",
+                  "addressLocality": "Utica",
+                  "addressRegion": "NY",
+                  "postalCode": "13502"
+                },
+                {
+                  "@type": "PostalAddress",
+                  "streetAddress": "103 West Dominick Street",
+                  "addressLocality": "Rome",
+                  "addressRegion": "NY",
+                  "postalCode": "13440"
+                },
+                {
+                  "@type": "PostalAddress",
+                  "streetAddress": "4754 Commercial Dr.",
+                  "addressLocality": "New Hartford",
+                  "addressRegion": "NY",
+                  "postalCode": "13413"
+                },
+                {
+                  "@type": "PostalAddress",
+                  "streetAddress": "109 Genesee Street",
+                  "addressLocality": "Oneida",
+                  "addressRegion": "NY",
+                  "postalCode": "13421"
+                }
+              ],
+              "telephone": [
+                "315-275-3214",
+                "315-271-2394",
+                "315-275-3046",
+                "315-231-5530"
+              ],
+              "medicalSpecialty": [
+                "Urgent Care",
+                "X-rays",
+                "Physicals",
+                "Occupational Medicine",
+                "Pediatric Care"
+              ]
+            },
+            {
+              "@type": "MedicalClinic",
+              "name": "Your Quick Care",
+              "parentOrganization": {
+                "@type": "Organization",
+                "name": "Oneida Health"
+              },
+              "address": [
+(Content truncated due to size limit. Use page ranges or line ranges to read remaining content)

@@ -1,0 +1,73 @@
+ntegrating insurance and accepted plans is essential for making the directory functional.
+
+Based on our previous design, here is how we can seamlessly integrate this new, critical data.
+
+1. 🆕 New Module: "My Profile & Insurance"
+Before, we had a simple "Settings" icon. This now becomes a full-fledged "Profile" module, and its primary job is to store the user's insurance plan.
+
+User Flow:
+
+The user taps the "Profile" icon (which replaces "Settings") on the "Home" tab.
+
+They see a section: "My Health Plan" with an "Add Insurance" button.
+
+Tapping this opens a search screen where they can find their insurer (e.g., "Fidelis Care," "Excellus," "Aetna") and, optionally, their specific plan.
+
+This screen must also include simple, top-level toggles for "I have Medicaid" and "I have Medicare" for users who identify with the program, not a specific managed care company.
+
+Once added, their plan is saved to the app.
+
+Why this is crucial: By having the user save their plan once, we can create a powerful, personalized "In-Network" filter that works across the entire app.
+
+2. 🔄 Updated Modules & Screens
+Here is how saving an insurance plan changes the rest of the application layout.
+
+1. Updated: "Home" Tab
+Smart Banner: The moment the app opens, it checks if insurance is saved.
+
+If NO plan is saved: A banner appears at the top: "Add your insurance to see providers in your network." Tapping it goes to the "My Profile" module.
+
+If a plan IS saved: A small label appears under the "Home" title: "Active Plan: [Fidelis Care]" with a "Change" link.
+
+2. Updated: "Search" & "Results List"
+This is where the biggest change happens. The filter system becomes paramount.
+
+New "Filter" Button: Every results list (e.g., after tapping "Urgent Care" or searching "Cardiology") now has a prominent "Filter" button.
+
+The Filter Screen: Tapping "Filter" opens a new screen with these options:
+
+"In-Network Only" (Toggle): This is the master switch. If the user has a saved plan, this is ON by default. It automatically filters the list to only show providers who accept the user's saved plan.
+
+"Accepts Medicaid" (Checkbox): A specific, high-level filter.
+
+"Accepts Medicare" (Checkbox): Another high-level filter.
+
+Manual Insurance Search: A search bar to manually filter by any insurance, in case the user is searching for a family member.
+
+Updated Provider Card: The card in the results list now has a new component.
+
+NEW: "In-Network" Badge: If the user has a saved plan and this provider accepts it, a small, green "✅ In-Network" badge appears on the card. This provides immediate, scannable confirmation.
+
+3. Updated: "Provider Detail" Page
+This screen becomes the "source of truth" for all insurance questions.
+
+NEW: "Insurance & Plans" Section: This is now one of the most important sections on the page, placed high up (e.g., right under "Locations").
+
+Smart Display:
+
+If user has a saved plan: The very first item is a high-contrast box: "✅ Accepts your plan: [Fidelis Care]".
+
+If user has NO saved plan (or the provider is out-of-network): The box will say "❌ May not accept your plan" or "ℹ️ Check plans below".
+
+Full Plan List:
+
+Below this smart display, the page lists all accepted plans.
+
+This section must have its own search bar (e.g., "Search accepted plans...") because a provider might accept hundreds.
+
+It will display "Medicaid" and "Medicare" as top-level, easy-to-see tags if they are accepted.
+
+4. Updated: "Map View" Tab
+Filter Integration: The "Filter" button on the map now opens the same filter screen from the Results List.
+
+User Flow: A user can open the map, tap "Filter," toggle "In-Network Only," and all the out-of-network provider pins will be hidden, simplifying the view instantly.

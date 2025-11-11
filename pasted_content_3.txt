@@ -1,0 +1,143 @@
+Based on the cnyhealth.json data, here is an explanation of the UX and design modules for a CNY Healthcare Directory, structured for an AI to understand and design.
+
+The core challenge of this JSON is that it's a flat list of 80+ providers. The primary UX goal is to categorize this data into intuitive, task-oriented modules so a user can find what they need without being overwhelmed.
+
+1. Module: Main Dashboard / Discovery Hub
+This is the "home" screen. It functions as a top-level navigation hub, translating the flat JSON list into logical, user-friendly categories.
+
+UX (User Experience):
+
+Task-Oriented Navigation: The user is immediately presented with a grid of categories based on common healthcare needs, not a list of providers. This is the "Every Day Essentials" grid from your first example, but for medicine.
+
+High-Intent Search: A prominent search bar is placed at the top for users who know exactly what (or who) they are looking for (e.g., "Wynn," "cardiology," "WellNow").
+
+High-Priority Banner: A non-dismissible, high-contrast banner for "Crisis Support" should be present to provide immediate access to critical numbers.
+
+Design (User Interface):
+
+Component: Search Bar: A full-width search bar at the top with a "Search providers, specialties..." placeholder.
+
+Component: Crisis Banner: A (e.g., red) banner with a clear title ("In a Crisis?") and a tappable "Get Help Now" button.
+
+Component: Category Icon Grid: A 2x3 or 3x2 grid of icons. Each icon is a touch target that launches a pre-filtered list from Module 2.
+
+JSON Data Mapping (Synthetic Categories): This module requires the AI to create categories by filtering the containsPlace array:
+
+"Hospitals" Button: Filters for @type: "Hospital".
+
+Yields: Wynn Hospital, Rome Health, Oneida Health.
+
+"Urgent Care" Button: Filters for medicalSpecialty containing "Urgent Care."
+
+Yields: WellNow, Your Quick Care, Slocum-Dickson, etc.
+
+"Primary Care" Button: Filters for medicalSpecialty containing "Primary Care," "Family Medicine," "Family Practice," or "Internal Medicine."
+
+Yields: Sister Rose, Upstate Family Health, Pachikara, etc.
+
+"Specialists" Button: Filters for @type: "Physician". This will lead to a secondary category list (see Module 2a).
+
+"Lab & Imaging" Button: Filters for @type: "MedicalLaboratory".
+
+Yields: Oneida Health Imaging, Labcorp, Quest, etc.
+
+"Behavioral Health" Button: Filters for medicalSpecialty containing "Mental Health," "Addiction," "Psychiatry," or "Counseling."
+
+Yields: Neighborhood Center, Beacon Center, Helio Health, etc.
+
+"Crisis Support" Banner: Links to a static page/modal built from name: "988 Suicide & Crisis Lifeline", name: "Mobile Crisis Assessment Team (MCAT)", etc.
+
+2. Module: Search & Results Listing
+This module displays the list of providers after a user searches or taps a category.
+
+UX (User Experience):
+
+Contextual List: The user sees a scrollable list of providers relevant only to their selection (e.g., "Urgent Care").
+
+Filtering (Sub-Category): For broad categories like "Specialists," the user is first shown another list of categories (e.g., "Cardiology," "Orthopedics," "Dermatology") before seeing providers.
+
+Scannability: The user can quickly scan and compare options. Key information (Name, Location, Affiliation) is visible on each card.
+
+Design (User Interface):
+
+Layout: A vertical, scrollable list.
+
+Component: Rich Result Card: This is the key component, analogous to the "Marketplace Search" cards. Each card in the list must be a "touch target" that navigates to the Provider Detail Page (Module 3).
+
+JSON Data Mapping (Per Card):
+
+Title: name (e.g., "WellNow Urgent Care")
+
+Subtitle/Tag: medicalSpecialty (e.g., "Urgent Care, X-rays")
+
+Location: address.addressLocality (e.g., "Utica")
+
+Affiliation (Optional): parentOrganization.name (e.g., "Oneida Health")
+
+3. Module: Provider Detail Page
+This module is the "Product Detail Page" from your first example. It displays all information for a single selected provider.
+
+UX (User Experience):
+
+Information Hierarchy: The most critical information (Name, Address, Phone) is at the top.
+
+Clear Actions: The primary CTAs are "Call" and "Get Directions." These should be prominent buttons.
+
+Progressive Disclosure: Less critical information (e.g., all specialties, specific services) is organized into clean sub-sections.
+
+Multi-Location Handling: For providers with multiple addresses (like "WellNow" or "Labcorp"), the UI must clearly list all locations and phone numbers.
+
+Design (User Interface):
+
+Component: Hero: A static map image based on the address coordinates (if available) or a placeholder image.
+
+Component: Primary Action Buttons: Two large, clear buttons: "Call" and "Directions."
+
+Component: Information Blocks: Clean sections for "Locations," "Services & Specialties," and "Affiliations."
+
+JSON Data Mapping (Per Page):
+
+Page Title: name (e.g., "Wynn Hospital")
+
+"Call" Button: Connects to telephone (must be tel: link). If multiple, this button might open a list.
+
+"Directions" Button: Connects to address (launches native maps).
+
+"Locations" Block:
+
+Iterates through the address array (if it's an array).
+
+Displays streetAddress, addressLocality, postalCode.
+
+Lists the corresponding telephone for each location.
+
+"Services & Specialties" Block:
+
+Creates a bulleted list or "tag group" from medicalSpecialty.
+
+Also lists items from hasPOS.name (e.g., "24/7 Emergency Room") and serviceType (e.g., "X-rays," "Casting").
+
+"Affiliation" Block:
+
+Displays parentOrganization.name (e.g., "Mohawk Valley Health System").
+
+4. Module: Account & Favorites
+This module mirrors the "Account details" and "Favorites" functionality from the first app, providing user-specific value.
+
+UX (User Experience):
+
+Saving: The user can tap a "Save" or "Favorite" icon on any Provider Detail Page (Module 3).
+
+Quick Access: The user can navigate to a "My Favorites" tab (e.g., from the main dashboard) to see a saved list of their own doctors, labs, or providers.
+
+Personalization: This allows the user to build their own mini-directory of providers they trust, which is a key value-add for a health app.
+
+Design (User Interface):
+
+Component: "Save" Icon: A bookmark/heart icon in the navigation bar of the Provider Detail Page.
+
+Screen: "Favorites": A simple list screen, reusing the "Rich Result Card" (from Module 2) for each provider the user has saved.
+
+JSON Data Mapping:
+
+This module doesn't map directly from the JSON. It stores a list of name or provider IDs that the user has selected, then uses those IDs to fetch the corresponding data from the main JSON to display in the list.
