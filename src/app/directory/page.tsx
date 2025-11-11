@@ -45,7 +45,9 @@ function DirectoryContent() {
         },
         body: JSON.stringify({
           message: userMessage,
-          context: newHistory.slice(-5)
+          context: newHistory.slice(-5),
+          insurance: insuranceParam,
+          needs: needsParam
         })
       })
 

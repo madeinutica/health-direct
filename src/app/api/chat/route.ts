@@ -1,31 +1,98 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
 
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-const SYSTEM_PROMPT = `You are a helpful healthcare concierge assistant for a healthcare directory platform in Oneida County, New York. Your role is to help users find appropriate healthcare providers, understand healthcare services, and provide general guidance about healthcare options in the area.
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+)
 
-Key areas you can help with:
-- Finding healthcare providers by specialty, location, or specific needs
-- Explaining different types of healthcare services
-- Helping users understand when to seek emergency care vs. urgent care vs. regular appointments
-- Providing information about common medical specialties
-- Offering guidance on healthcare insurance and coverage questions
-- Suggesting questions to ask healthcare providers
+function buildSystemPrompt(providerData: any[], userInsurance?: string, userNeeds?: string) {
+  const providerTypes = [...new Set(providerData.map(p => p.type))].join(', ')
+  const allSpecialties = [...new Set(providerData.flatMap(p => p.medical_specialty || []))].slice(0, 30)
+  const cities = [...new Set(providerData.map(p => {
+    const addr = Array.isArray(p.address) ? p.address[0] : p.address
+    return addr?.addressLocality
+  }).filter(Boolean))].join(', ')
 
-Important guidelines:
-- Always recommend users consult with qualified healthcare professionals for medical advice
-- Never provide specific medical diagnoses or treatment recommendations
-- Focus on helping users navigate the healthcare system and find appropriate care
-- Be empathetic and understanding, as healthcare decisions can be stressful
-- If asked about specific providers, suggest using the directory search features
-- Keep responses helpful, clear, and concise
-- For emergency situations, always recommend calling 911 or going to the nearest emergency room
+  let userContext = ''
+  if (userInsurance || userNeeds) {
+    userContext = `\n\nCURRENT USER CONTEXT:
+- Insurance: ${userInsurance || 'Not specified'}
+- Healthcare Need: ${userNeeds || 'Not specified'}
 
-The healthcare directory includes hospitals, medical clinics, physicians, medical centers, laboratories, and other healthcare providers in the Oneida County area, including cities like Utica, Rome, Oneida, New Hartford, and surrounding communities.`
+When making recommendations, prioritize providers that match the user's insurance and needs.`
+  }
+
+  return `You are an intelligent healthcare concierge AI for myhealth315, a healthcare directory platform serving Central New York (Oneida County). You have REAL-TIME ACCESS to our complete provider database.
+
+PROVIDER DATABASE OVERVIEW:
+- Total Providers: ${providerData.length}
+- Provider Types: ${providerTypes}
+- Available Specialties: ${allSpecialties.join(', ')}
+- Service Areas: ${cities}
+${userContext}
+
+YOUR CAPABILITIES:
+1. **Intelligent Provider Matching**: Analyze user needs and recommend specific providers from our database
+2. **Specialty Expertise**: Understand medical specialties and match them to user symptoms/conditions
+3. **Insurance Guidance**: Help users find providers accepting their insurance
+4. **Location-Based Recommendations**: Suggest providers based on proximity and convenience
+5. **Urgency Assessment**: Determine if users need emergency care, urgent care, or can schedule regular appointments
+
+RESPONSE FORMAT:
+When recommending providers, be specific and use this structure:
+- **Directly name 2-3 specific providers** from our database that best match their needs
+- Explain WHY each provider is a good match (specialty, location, insurance, ratings)
+- Provide actionable next steps (e.g., "I can filter the results below to show you...")
+
+AVAILABLE PROVIDERS SAMPLE (use these in recommendations):
+${providerData.slice(0, 15).map(p => 
+  `- ${p.name} (${p.type}) - Specialties: ${(p.medical_specialty || []).slice(0, 3).join(', ')} - Location: ${
+    Array.isArray(p.address) ? p.address[0]?.addressLocality : p.address?.addressLocality
+  }`
+).join('\n')}
+
+IMPORTANT GUIDELINES:
+- **Be specific**: Reference actual provider names, specialties, and locations from our database
+- **Be intelligent**: Match user symptoms/conditions to appropriate medical specialties
+- **Be actionable**: Tell users exactly what to search for or how to filter results
+- **Be empathetic**: Healthcare decisions are stressful - be supportive and clear
+- **Be safe**: For emergencies, always recommend 911 or emergency room immediately
+- **Be honest**: If you don't have a perfect match, suggest the closest alternatives and explain why
+
+EXAMPLE QUALITY RESPONSES:
+❌ Bad: "You can search for doctors in the directory."
+✅ Good: "Based on your knee pain, I recommend **Dr. Sarah Johnson** at Mohawk Valley Orthopedics - she specializes in sports medicine and joint care. I'll filter the results below to show orthopedic specialists accepting Blue Cross insurance."
+
+Remember: You have access to real provider data - USE IT to give specific, helpful recommendations!`
+}
+
+async function fetchProviderContext(userMessage: string, insurance?: string, needs?: string) {
+  try {
+    // Fetch all providers with key information
+    const { data, error } = await supabase
+      .from('healthcare_providers')
+      .select('id, name, type, medical_specialty, address, rating, review_count, telephone, is_emergency, is_24_hours')
+      .limit(100)
+
+    if (error) {
+      console.error('Error fetching provider context:', error)
+      return []
+    }
+
+    return data || []
+  } catch (error) {
+    console.error('Error in fetchProviderContext:', error)
+    return []
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, context } = await request.json()
+    const { message, context, insurance, needs } = await request.json()
 
     if (!process.env.OPENROUTER_API_KEY) {
       return NextResponse.json(
@@ -41,9 +108,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Fetch real provider data to train the AI
+    const providerData = await fetchProviderContext(message, insurance, needs)
+    const systemPrompt = buildSystemPrompt(providerData, insurance, needs)
+
     // Build conversation history for context
     const messages = [
-      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'system', content: systemPrompt },
       ...context.slice(-5).map((msg: any) => ({
         role: msg.type === 'user' ? 'user' : 'assistant',
         content: msg.content
@@ -56,13 +127,13 @@ export async function POST(request: NextRequest) {
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-        'X-Title': 'Healthcare Directory',
+        'X-Title': 'myhealth315 Healthcare Directory',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         model: 'anthropic/claude-3-haiku',
         messages,
-        max_tokens: 500,
+        max_tokens: 800,
         temperature: 0.7,
       }),
     })
@@ -74,7 +145,10 @@ export async function POST(request: NextRequest) {
     const completion = await response.json()
     const assistantMessage = completion.choices[0]?.message?.content || 'I apologize, but I was unable to generate a response. Please try again.'
 
-    return NextResponse.json({ message: assistantMessage })
+    return NextResponse.json({ 
+      message: assistantMessage,
+      providersCount: providerData.length 
+    })
 
   } catch (error) {
     console.error('Chat API error:', error)

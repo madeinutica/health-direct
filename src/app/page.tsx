@@ -41,7 +41,9 @@ export default function HomePage() {
           },
           body: JSON.stringify({
             message: `Insurance: ${insuranceProvider}. Need: ${userInput}. Provide a brief search query to find the right provider.`,
-            context: []
+            context: [],
+            insurance: insuranceProvider,
+            needs: userInput
           })
         })
 
