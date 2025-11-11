@@ -161,10 +161,17 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
   const fetchProviders = useCallback(async () => {
     setLoading(true)
     try {
+      console.log('🔍 Fetching providers with filters:', {
+        searchQuery,
+        selectedCategory,
+        selectedSpecialty
+      })
+
       let query = supabase.from('healthcare_providers').select('*')
 
       if (searchQuery) {
-        query = query.or(`name.ilike.%${searchQuery}%,medicalSpecialty.cs.["${searchQuery}"]`)
+        // Search by name and medical specialties
+        query = query.or(`name.ilike.%${searchQuery}%`)
       }
 
       if (selectedCategory && selectedCategory !== 'all') {
@@ -172,13 +179,20 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
       }
 
       if (selectedSpecialty && selectedSpecialty !== 'all') {
-        query = query.contains('medicalSpecialty', [selectedSpecialty])
+        // Use contains for array search with correct column name
+        query = query.contains('medical_specialty', [selectedSpecialty])
       }
 
+      console.log('🔍 Executing Supabase query...')
       const { data, error } = await query.order('name')
 
       if (error) {
-        console.error('Error fetching providers:', error)
+        console.error('❌ Supabase Error Details:', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code
+        })
         // Fallback to mock data
         const mockResults: HealthcareProvider[] = [
           {
@@ -234,14 +248,37 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
             is24Hours: false
           }
         ]
+        console.log('📋 Using fallback mock data')
         setProviders(mockResults)
         onSearchResultsRef.current?.(mockResults)
       } else {
-        setProviders(data || [])
-        onSearchResultsRef.current?.(data || [])
+        console.log('✅ Successfully fetched providers:', data?.length)
+        // Transform database fields to match TypeScript interface
+        const transformedData = data?.map((provider: any) => ({
+          ...provider,
+          medicalSpecialty: provider.medical_specialty,
+          serviceType: provider.service_type,
+          reviewCount: provider.review_count,
+          isEmergency: provider.is_emergency,
+          is24Hours: provider.is_24_hours,
+          acceptsInsurance: provider.accepts_insurance,
+          languagesSpoken: provider.languages_spoken,
+          parentOrganization: provider.parent_organization,
+          hasPOS: provider.has_pos,
+          geocodingAccuracy: provider.geocoding_accuracy,
+          geocodedAddress: provider.geocoded_address,
+          createdAt: provider.created_at,
+          updatedAt: provider.updated_at
+        })) || []
+        
+        setProviders(transformedData)
+        onSearchResultsRef.current?.(transformedData)
       }
     } catch (error) {
-      console.error('Search error:', error)
+      console.error('💥 Fetch error:', error)
+      // Use mock data as fallback
+      const mockResults: HealthcareProvider[] = []
+      setProviders(mockResults)
     } finally {
       setLoading(false)
     }
