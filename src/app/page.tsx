@@ -78,23 +78,28 @@ export default function HomePage() {
     setInputValue(prompt)
   }
 
-  const suggestedPrompts = [
-    { text: "I have Blue Cross Blue Shield and need a primary care doctor", color: "from-blue-400 to-blue-500" },
-    { text: "I'm experiencing chest pain and need urgent care", color: "from-red-400 to-red-500" },
-    { text: "I need a pediatrician for my 5-year-old", color: "from-purple-400 to-purple-500" },
-    { text: "Looking for a cardiologist that accepts Medicaid", color: "from-pink-400 to-pink-500" },
-    { text: "I have diabetes and need an endocrinologist", color: "from-teal-400 to-teal-500" },
-    { text: "Need a dermatologist for a skin condition", color: "from-orange-400 to-orange-500" }
+  // Insurance provider prompts
+  const insurancePrompts = [
+    { text: "Blue Cross Blue Shield", color: "from-blue-400 to-blue-500" },
+    { text: "Medicaid", color: "from-green-400 to-green-500" },
+    { text: "Medicare", color: "from-purple-400 to-purple-500" },
+    { text: "Aetna", color: "from-pink-400 to-pink-500" },
+    { text: "UnitedHealthcare", color: "from-cyan-400 to-cyan-500" },
+    { text: "I don't have insurance", color: "from-gray-400 to-gray-500" }
   ]
 
-  const quickSearches = [
-    "Primary Care",
-    "Urgent Care",
-    "Pediatrics",
-    "Cardiology",
-    "Mental Health",
-    "Dermatology"
+  // Healthcare needs prompts
+  const needsPrompts = [
+    { text: "I need a primary care doctor for annual checkup", color: "from-blue-400 to-blue-500" },
+    { text: "I have knee pain and need a specialist", color: "from-red-400 to-red-500" },
+    { text: "I need a pediatrician for my child", color: "from-purple-400 to-purple-500" },
+    { text: "I need help with anxiety or depression", color: "from-pink-400 to-pink-500" },
+    { text: "I need a cardiologist for heart concerns", color: "from-teal-400 to-teal-500" },
+    { text: "I have a skin condition and need a dermatologist", color: "from-orange-400 to-orange-500" }
   ]
+
+  // Get current prompts based on step
+  const currentPrompts = currentStep === 'insurance' ? insurancePrompts : needsPrompts
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
@@ -226,11 +231,11 @@ export default function HomePage() {
           {/* Prompt Slider */}
           <div className="max-w-5xl mx-auto">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 px-1">
-              Quick Prompts
+              {currentStep === 'insurance' ? 'Common Insurance Providers' : 'Common Healthcare Needs'}
             </p>
             <div className="overflow-x-auto scrollbar-hide -mx-4 px-4">
               <div className="flex space-x-3 pb-2">
-                {suggestedPrompts.map((prompt, idx) => (
+                {currentPrompts.map((prompt, idx) => (
                   <button
                     key={idx}
                     onClick={() => handlePromptClick(prompt.text)}
@@ -307,32 +312,6 @@ export default function HomePage() {
         </div>
 
         {/* Quick Searches */}
-        <div className="mb-6 max-w-4xl mx-auto">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg lg:text-xl font-extrabold text-gray-900 tracking-tight">Quick Searches</h3>
-            <button 
-              onClick={() => router.push('/directory')}
-              className="text-sm lg:text-base font-bold text-primary-600"
-            >
-              See All
-            </button>
-          </div>
-          
-          <div className="overflow-x-auto scrollbar-hide -mx-4 px-4">
-            <div className="flex space-x-3 pb-2">
-              {quickSearches.map((search, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => router.push(`/directory?query=${encodeURIComponent(search)}`)}
-                  className="flex-shrink-0 px-5 py-2 bg-white rounded-full border border-gray-200 text-sm lg:text-base font-semibold text-gray-700 hover:bg-gray-50 shadow-sm transition-colors"
-                >
-                  {search}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* Info Card */}
         <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 lg:p-8 text-white shadow-lg max-w-4xl mx-auto">
           <HeartIcon className="h-8 w-8 lg:h-10 lg:w-10 mb-3" />
