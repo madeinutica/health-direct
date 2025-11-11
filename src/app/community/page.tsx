@@ -1,9 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Navigation from '@/components/Navigation'
 import { CommunityFeed, NewPostForm } from '@/components/Community'
-import { PlusIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
+import { PlusIcon } from '@heroicons/react/24/outline'
 import { CommunityPost, User } from '@/types'
 
 export default function CommunityPage() {
@@ -117,111 +116,73 @@ export default function CommunityPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navigation />
-
+    <div className="min-h-screen">
       {/* Header */}
       <div className="bg-white border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Community
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              Connect with others, share experiences, and get advice from the healthcare community in Oneida County.
-            </p>
-            <button
-              onClick={() => setShowNewPostForm(true)}
-              className="inline-flex items-center space-x-2 bg-primary-500 text-white px-6 py-3 rounded-lg hover:bg-primary-600 transition-colors"
-            >
-              <PlusIcon className="h-5 w-5" />
-              <span>Create Post</span>
-            </button>
-          </div>
+        <div className="px-4 py-6 text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            Community
+          </h1>
+          <p className="text-sm text-gray-600 mb-4">
+            Connect and share healthcare experiences
+          </p>
+          <button
+            onClick={() => setShowNewPostForm(true)}
+            className="inline-flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
+          >
+            <PlusIcon className="h-4 w-4" />
+            <span>Create Post</span>
+          </button>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="space-y-6">
-              {/* Categories */}
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
-                <nav className="space-y-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => setSelectedCategory(category.id)}
-                      className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
-                        selectedCategory === category.id
-                          ? 'bg-primary-100 text-primary-700'
-                          : 'text-gray-600 hover:bg-gray-50'
-                      }`}
-                    >
-                      <span>{category.label}</span>
-                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                        {category.count}
-                      </span>
-                    </button>
-                  ))}
-                </nav>
-              </div>
-
-              {/* Community Stats */}
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Community Stats</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Total Posts</span>
-                    <span className="font-medium">247</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Active Members</span>
-                    <span className="font-medium">1,089</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">This Week</span>
-                    <span className="font-medium">23 posts</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Guidelines */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h4 className="text-sm font-semibold text-blue-900 mb-2">Community Guidelines</h4>
-                <ul className="text-xs text-blue-700 space-y-1">
-                  <li>• Be respectful and supportive</li>
-                  <li>• No medical advice - consult professionals</li>
-                  <li>• Protect privacy - no personal health details</li>
-                  <li>• Keep discussions relevant to healthcare</li>
-                </ul>
-              </div>
+      <div className="px-4 py-4">
+        <div className="space-y-6">
+          {/* Categories - Mobile Horizontal Scroll */}
+          <div className="bg-white rounded-lg border border-gray-200 p-4">
+            <h3 className="text-base font-semibold text-gray-900 mb-3">Categories</h3>
+            <div className="flex overflow-x-auto space-x-2 pb-2">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`flex-shrink-0 flex items-center space-x-2 px-3 py-2 text-sm rounded-lg transition-colors ${
+                    selectedCategory === category.id
+                      ? 'bg-primary-100 text-primary-700'
+                      : 'text-gray-600 hover:bg-gray-50 bg-gray-50'
+                  }`}
+                >
+                  <span>{category.label}</span>
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                    {category.count}
+                  </span>
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            {showNewPostForm ? (
-              <div className="mb-8">
-                <NewPostForm 
-                  onSubmit={handleNewPost}
-                  onCancel={() => setShowNewPostForm(false)}
-                />
-              </div>
-            ) : (
-              <div className="mb-6 flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-900">
-                    {selectedCategory === 'all' ? 'All Posts' : categories.find(c => c.id === selectedCategory)?.label}
-                  </h2>
-                  <p className="text-sm text-gray-600">
-                    {filteredPosts.length} posts
-                  </p>
-                </div>
-                
-                <div className="flex items-center space-x-4">
+          {/* New Post Form or Post List */}
+          {showNewPostForm ? (
+            <div className="bg-white rounded-lg border border-gray-200">
+              <NewPostForm 
+                onSubmit={handleNewPost}
+                onCancel={() => setShowNewPostForm(false)}
+              />
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {/* Sort Options */}
+              <div className="bg-white rounded-lg border border-gray-200 p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-lg font-semibold text-gray-900">
+                      {selectedCategory === 'all' ? 'All Posts' : categories.find(c => c.id === selectedCategory)?.label}
+                    </h2>
+                    <p className="text-sm text-gray-600">
+                      {filteredPosts.length} posts
+                    </p>
+                  </div>
+                  
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
@@ -235,23 +196,24 @@ export default function CommunityPage() {
                   </select>
                 </div>
               </div>
-            )}
 
-            <CommunityFeed
-              posts={filteredPosts}
-              onLike={handleLike}
-              onPostClick={handlePostClick}
-            />
+              {/* Posts */}
+              <CommunityFeed
+                posts={filteredPosts}
+                onLike={handleLike}
+                onPostClick={handlePostClick}
+              />
 
-            {/* Load More */}
-            {filteredPosts.length > 0 && (
-              <div className="text-center mt-8">
-                <button className="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                  Load More Posts
-                </button>
-              </div>
-            )}
-          </div>
+              {/* Load More */}
+              {filteredPosts.length > 0 && (
+                <div className="text-center">
+                  <button className="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    Load More Posts
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

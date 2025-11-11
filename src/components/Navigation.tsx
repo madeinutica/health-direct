@@ -2,48 +2,81 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline'
+import { 
+  ChatBubbleLeftRightIcon,
+  MapPinIcon,
+  UserGroupIcon
+} from '@heroicons/react/24/outline'
+import {
+  ChatBubbleLeftRightIcon as ChatBubbleLeftRightIconSolid,
+  MapPinIcon as MapPinIconSolid,
+  UserGroupIcon as UserGroupIconSolid
+} from '@heroicons/react/24/solid'
 
 export default function Navigation() {
   const pathname = usePathname()
-  
-  const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/directory', label: 'Directory' },
-    { href: '/community', label: 'Community' },
-    { href: '/reviews', label: 'Reviews' },
+
+  const navigation = [
+    {
+      name: 'Chat',
+      href: '/',
+      icon: ChatBubbleLeftRightIcon,
+      iconSolid: ChatBubbleLeftRightIconSolid,
+      description: 'AI Health Assistant'
+    },
+    {
+      name: 'Directory',
+      href: '/directory',
+      icon: MapPinIcon,
+      iconSolid: MapPinIconSolid,
+      description: 'Find Providers'
+    },
+    {
+      name: 'Community',
+      href: '/community',
+      icon: UserGroupIcon,
+      iconSolid: UserGroupIconSolid,
+      description: 'Health Community'
+    }
   ]
-  
+
   return (
-    <header className="bg-white shadow-sm border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-gray-900">
-              HealthDirect
-            </Link>
-          </div>
-          <nav className="flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`transition-colors ${
-                  pathname === item.href
-                    ? 'text-primary-600 font-medium'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <button className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors">
-              <ChatBubbleLeftIcon className="h-4 w-4" />
-              <span>Chat</span>
-            </button>
-          </nav>
+    <>
+      {/* Mobile-First Top Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        {/* Logo Row - Centered */}
+        <div className="flex items-center justify-center py-3 px-4 border-b border-gray-100">
+          <h1 className="text-xl font-bold text-primary-600">HealthDirect</h1>
         </div>
-      </div>
-    </header>
+
+        {/* Navigation Icons Row - Always Visible */}
+        <div className="px-4">
+          <div className="grid grid-cols-3 gap-1">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href
+              const Icon = isActive ? item.iconSolid : item.icon
+              
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`flex flex-col items-center justify-center py-3 px-2 rounded-lg transition-colors ${
+                    isActive
+                      ? 'text-primary-600 bg-primary-50'
+                      : 'text-gray-500 hover:text-primary-600 hover:bg-gray-50'
+                  }`}
+                >
+                  <Icon className="h-6 w-6 mb-1" />
+                  <span className="text-xs font-medium text-center">{item.name}</span>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </nav>
+
+      {/* Spacer for fixed navigation - Adjusted for new height */}
+      <div className="h-24"></div>
+    </>
   )
 }

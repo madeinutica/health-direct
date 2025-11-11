@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ChatConcierge from '@/components/ChatConcierge'
+import Navigation from '@/components/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,9 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
-        <ChatConcierge />
+      <body className={`${inter.className} bg-gray-50`}>
+        <Navigation />
+        <main className="min-h-screen pb-safe pt-[30px]">
+          {children}
+        </main>
       </body>
     </html>
   )
