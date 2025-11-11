@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { PaperAirplaneIcon, HeartIcon, ShieldCheckIcon, StarIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function HomePage() {
   const [inputValue, setInputValue] = useState('')
@@ -48,7 +49,7 @@ export default function HomePage() {
               Find Your Perfect Provider
             </h1>
             <p className="text-gray-600 text-base font-medium">
-              Describe your needs and we'll match you with the right healthcare professional
+              Describe your needs and we&apos;ll match you with the right healthcare professional
             </p>
           </div>
           
@@ -102,10 +103,11 @@ export default function HomePage() {
         >
           {/* Background Image */}
           <div className="relative h-56">
-            <img 
+            <Image 
               src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80" 
               alt="Hospital"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 via-purple-600/80 to-pink-500/80"></div>
             
