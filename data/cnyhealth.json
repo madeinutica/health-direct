@@ -1,0 +1,1615 @@
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalOrganization",
+  "name": "Oneida County Healthcare Provider Directory",
+  "description": "Comprehensive guide to medical facilities and specialists in Oneida County, NY, optimized for AI and voice search: hospitals, urgent care, specialists, primary care.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "New York",
+    "addressLocality": "Oneida County"
+  },
+  "url": "https://example.com/oneida-healthcare-directory",
+  "containsPlace": [
+    {
+      "@type": "Hospital",
+      "name": "Wynn Hospital",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "111 Hospital Drive",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-917-9966",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "medicalSpecialty": [
+        "Emergency",
+        "Stroke Care",
+        "Maternity",
+        "Pediatrics",
+        "Cardiology",
+        "Surgery",
+        "Oncology",
+        "Behavioral Health"
+      ],
+      "hasPOS": [
+        {
+          "@type": "EmergencyService",
+          "name": "24/7 Emergency Room",
+          "description": "Level III Trauma Center, 90,000 visits annually"
+        }
+      ],
+      "sameAs": "https://mvhealthsystem.org"
+    },
+    {
+      "@type": "Hospital",
+      "name": "Rome Health Medical Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1500 North James Street",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "telephone": "315-338-7000",
+      "medicalSpecialty": [
+        "Emergency",
+        "Maternity",
+        "Senior Services",
+        "Behavioral Health"
+      ],
+      "hasPOS": [
+        {
+          "@type": "EmergencyService",
+          "name": "24/7 Emergency Services"
+        },
+        {
+          "@type": "HealthAndBeautyBusiness",
+          "name": "80-bed Skilled Nursing Facility"
+        }
+      ],
+      "sameAs": "https://romehealth.org"
+    },
+    {
+      "@type": "Hospital",
+      "name": "Oneida Health Hospital",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "321 Genesee Street",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-363-6000",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "medicalSpecialty": [
+        "Emergency",
+        "Critical Care",
+        "Surgery"
+      ],
+      "hasPOS": [
+        {
+          "@type": "EmergencyService",
+          "name": "24/7 Emergency Room"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "da Vinci Robotic Surgery"
+        }
+      ],
+      "sameAs": "https://oneidahealth.org"
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "WellNow Urgent Care",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "230 North Genesee Street",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "103 West Dominick Street",
+          "addressLocality": "Rome",
+          "addressRegion": "NY",
+          "postalCode": "13440"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "4754 Commercial Dr.",
+          "addressLocality": "New Hartford",
+          "addressRegion": "NY",
+          "postalCode": "13413"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "109 Genesee Street",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        }
+      ],
+      "telephone": [
+        "315-275-3214",
+        "315-271-2394",
+        "315-275-3046",
+        "315-231-5530"
+      ],
+      "medicalSpecialty": [
+        "Urgent Care",
+        "X-rays",
+        "Physicals",
+        "Occupational Medicine",
+        "Pediatric Care"
+      ]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Your Quick Care",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "603 Seneca Street",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "9562 NY-13",
+          "addressLocality": "Camden",
+          "addressRegion": "NY",
+          "postalCode": "13316"
+        }
+      ],
+      "telephone": [
+        "315-363-2123",
+        "315-245-5029"
+      ],
+      "medicalSpecialty": [
+        "Urgent Care",
+        "Laboratory",
+        "X-Ray"
+      ]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Slocum-Dickson Urgent Care",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1729 Burrstone Road",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-798-1400",
+      "medicalSpecialty": ["Urgent Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Mohawk Glen Urgent Care",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "91 Perimeter Rd, Suite 100",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13441"
+      },
+      "medicalSpecialty": ["Urgent Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "G.O. Ortho After-Hours Walk-In Clinic",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4401 Middle Settlement Road, Entrance A, Suite 102A",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-735-4496",
+      "medicalSpecialty": ["Orthopedic Injuries"],
+      "serviceType": ["X-rays", "Casting", "Durable Medical Goods"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Neighborhood Center - Open Access",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "628 Mary St",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13501"
+      },
+      "telephone": "315-272-2700",
+      "medicalSpecialty": ["Mental Health"],
+      "serviceType": ["Walk-in Assistance"]
+    },
+    {
+      "@type": "MedicalCenter",
+      "name": "Mohawk Valley Surgery Center",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "601 State St, 3rd Floor",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-914-1000",
+      "medicalSpecialty": ["Outpatient Surgery"]
+    },
+    {
+      "@type": "MedicalCenter",
+      "name": "Omni Ambulatory Surgery Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "498 French Road",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-765-8448",
+      "medicalSpecialty": ["Multi-Specialty Surgery"]
+    },
+    {
+      "@type": "MedicalCenter",
+      "name": "Griffiss Surgery Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "105 Dart Circle",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13441"
+      },
+      "telephone": "315-533-5747",
+      "medicalSpecialty": ["Multi-Specialty Surgery"]
+    },
+    {
+      "@type": "MedicalCenter",
+      "name": "Oneida Health Ambulatory Surgery",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "321 Genesee Street",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-361-2062",
+      "medicalSpecialty": ["Outpatient Procedures", "Robotic Surgery"]
+    },
+    {
+      "@type": "MedicalCenter",
+      "name": "Mohawk Valley Endoscopy Center",
+      "medicalSpecialty": ["Gastroenterology"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "116 Business Park Dr",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      }
+    },
+    {
+      "@type": "MedicalCenter",
+      "name": "Apex Surgical Center",
+      "medicalSpecialty": ["Orthopedics", "Plastics", "Pain Management"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Oneida County",
+        "addressRegion": "NY"
+      }
+    },
+    {
+      "@type": "MedicalCenter",
+      "name": "CNY Eye Surgery",
+      "medicalSpecialty": ["Ophthalmology"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "105 Dart Circle",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13441"
+      },
+      "telephone": "315-533-5747"
+    },
+    {
+      "@type": "Physician",
+      "name": "Central New York Cardiology",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "601 State Street, Suite 200",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        }
+      ],
+      "telephone": [
+        "315-733-7598",
+        "315-339-6420"
+      ],
+      "specialty": "Cardiology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Health Cardiology Specialists",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "321 Genesee Street, 3rd Floor",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-606-2705",
+      "specialty": "Cardiology"
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "MVHS Cancer Center",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "807 Newell Street",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-624-5300",
+      "medicalSpecialty": ["Oncology", "Hematology", "Radiation Therapy", "Infusion", "Breast Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Oneida Health Cancer Care",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Roswell Park Care Network"
+      },
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "604 Seneca Street",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "601 Seneca Street",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        }
+      ],
+      "telephone": [
+        "315-361-2381",
+        "315-361-2351"
+      ],
+      "medicalSpecialty": ["Medical Oncology", "Radiation Oncology"]
+    },
+    {
+      "@type": "Physician",
+      "name": "Hematology Oncology Associates of CNY",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "107 E Chestnut St, Ste 102",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "telephone": "315-339-5783",
+      "specialty": "Hematology Oncology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Health Orthopedic Care",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "357 Genesee Street",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-363-4651",
+      "specialty": "Orthopedics"
+    },
+    {
+      "@type": "Physician",
+      "name": "CNY Orthopedics",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "600 Seneca St",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-960-3940",
+      "specialty": "Orthopedics"
+    },
+    {
+      "@type": "Physician",
+      "name": "Genesee Orthopedics and Plastic Surgery Associates",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4401 Middle Settlement Rd, #102",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-735-4496",
+      "specialty": "Orthopedics"
+    },
+    {
+      "@type": "Physician",
+      "name": "Hamilton Orthopedics, Spine & Sports Medicine",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1 Oxford Road",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-824-1250",
+      "specialty": "Orthopedics"
+    },
+    {
+      "@type": "Physician",
+      "name": "Rome Health Orthopedics & Sports Medicine",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Chestnut Street",
+        "addressLocality": "Rome",
+        "addressRegion": "NY"
+      },
+      "specialty": "Orthopedics"
+    },
+    {
+      "@type": "Physician",
+      "name": "CNY Brain & Spine Neurosurgery",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "83 Genesee St",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-792-7629",
+      "specialty": "Neurosurgery"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Health Neurology Care",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "301 Genesee Street",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-361-2377",
+      "specialty": "Neurology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Rome Health Neurology",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "267 Avery Ln",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "telephone": "315-356-7380",
+      "specialty": "Neurology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Slocum-Dickson Medical Group - Neurology",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1729 Burrstone Road",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-798-1500",
+      "specialty": "Neurology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Health GI Specialists",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "139 Fields Drive",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-361-2385",
+      "specialty": "Gastroenterology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Digestive Disease Medicine of Central New York",
+      "specialty": "Gastroenterology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Health Pulmonary Specialists",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "600 Seneca Street, Suite 2",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-361-7472",
+      "specialty": "Pulmonology"
+    },
+    {
+      "@type": "Physician",
+      "name": "MVHS Medical Group – Pulmonary Medicine & Critical Care Group",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "111 Hospital Drive",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "specialty": "Pulmonology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Rome Health Pulmonary Practice",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rome",
+        "addressRegion": "NY"
+      },
+      "specialty": "Pulmonology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Xavier Medical",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "322 Main St",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-361-5000",
+      "specialty": "Pulmonology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Health Women's Health",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1144 Meadow Drive",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-363-9380",
+      "specialty": "Obstetrics and Gynecology"
+    },
+    {
+      "@type": "Physician",
+      "name": "MVHS Medical Group – Women's Health Services",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "telephone": "315-624-6241",
+      "specialty": "Women's Health"
+    },
+    {
+      "@type": "Physician",
+      "name": "Medical Arts OB-GYN P.C.",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1522 Old Burrstone Road",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "specialty": "Obstetrics and Gynecology"
+    },
+    {
+      "@type": "Physician",
+      "name": "CNY Gynecology",
+      "telephone": "315-363-9995",
+      "specialty": "Gynecology"
+    },
+    {
+      "@type": "Physician",
+      "name": "OB/GYN Associates of Central New York",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Utica",
+        "addressRegion": "NY"
+      },
+      "specialty": "Obstetrics and Gynecology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Health Pediatrics",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "421 Main St",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "117 W Liberty St, #1",
+          "addressLocality": "Rome",
+          "addressRegion": "NY",
+          "postalCode": "13440"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "90 Taberg St",
+          "addressLocality": "Camden",
+          "addressRegion": "NY",
+          "postalCode": "13316"
+        }
+      ],
+      "telephone": [
+        "315-363-2350",
+        "315-339-0401",
+        "315-245-5483"
+      ],
+      "specialty": "Pediatrics"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Pediatric Group",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY"
+      },
+      "specialty": "Pediatrics"
+    },
+    {
+      "@type": "Physician",
+      "name": "Child Health Associates",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY"
+      },
+      "specialty": "Pediatrics"
+    },
+    {
+      "@type": "Physician",
+      "name": "Schweiger Dermatology Group",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "6 Rhoads Drive",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "specialty": "Dermatology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Empire Dermatology",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY"
+      },
+      "specialty": "Dermatology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Farah Dermatology",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "107 E. Chestnut St",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "telephone": "315-400-4984",
+      "specialty": "Dermatology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Slocum-Dickson Medical Group - Dermatology",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1729 Burrstone Road",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-798-1500",
+      "specialty": "Dermatology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Associated Medical Professionals of NY, PLLC",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2 Ellinwood Dr",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-724-1012",
+      "specialty": "Urology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Upstate Urology at MVHS",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1676 Sunset Avenue, Second Floor",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "specialty": "Urology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Rome Health Urology Practice",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rome",
+        "addressRegion": "NY"
+      },
+      "specialty": "Urology"
+    },
+    {
+      "@type": "Physician",
+      "name": "Oneida Health Allergy and ENT Care",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "221 Broad Street, Suite 201",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-363-5421",
+      "specialty": "Allergy and ENT"
+    },
+    {
+      "@type": "Physician",
+      "name": "CNY Medicine & Allergy",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rome",
+        "addressRegion": "NY"
+      },
+      "telephone": "315-336-3380",
+      "specialty": "Allergy"
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Sister Rose Vincent Family Medicine Center",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "120 Hobart Street",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13501"
+      },
+      "telephone": "315-798-1149",
+      "medicalSpecialty": ["Family Medicine"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Upstate Family Health Center, Inc.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1001 Noyes St",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-624-9470",
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Pachikara Primary Care",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Utica - New Hartford",
+        "addressRegion": "NY"
+      },
+      "telephone": "315-797-2314",
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Slocum-Dickson Medical Group - Family Practice",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1729 Burrstone Road",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-798-1500",
+      "medicalSpecialty": ["Family Practice"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "MVHS Medical Group – Medical Arts Primary Care",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4401 Middle Settlement Road, Suite 208",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-733-1148",
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "MVHS Medical Group – Rome Medical Office",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1617 North James Street, Suite 900",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "telephone": "315-336-8260",
+      "medicalSpecialty": ["Primary Care", "Laboratory"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Rome Health Primary Care",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1500 North James Street",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "telephone": "315-338-7040",
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Rome Health - Prime Care",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "155 West Dominick St",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "CNY Medicine & Allergy (Internal Medicine)",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rome",
+        "addressRegion": "NY"
+      },
+      "telephone": "315-336-3380",
+      "medicalSpecialty": ["Internal Medicine"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Bassett Health Center - Oneida",
+      "telephone": "315-231-5400",
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "MVHS Medical Group – Oneida Medical Office",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "131 Main Street",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-366-3700",
+      "medicalSpecialty": ["Primary Care", "Laboratory"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Oneida Health Family Care - Oneida",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "301 Genesee Street, Suite A",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-606-2601",
+      "medicalSpecialty": ["Family Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "TriValley Family Practice",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "3 Curtis Road",
+          "addressLocality": "Vernon",
+          "addressRegion": "NY",
+          "postalCode": "13476"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "115 Center St",
+          "addressLocality": "Canastota",
+          "addressRegion": "NY",
+          "postalCode": "13032"
+        }
+      ],
+      "telephone": [
+        "315-829-2220",
+        "315-697-5272"
+      ],
+      "medicalSpecialty": ["Family Practice"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "MVHS Medical Group - Boonville Medical Office",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "telephone": "315-942-4391",
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Rome Health - Boonville Health Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "13407 State Route 12",
+        "addressLocality": "Boonville",
+        "addressRegion": "NY",
+        "postalCode": "13309"
+      },
+      "telephone": [
+        "315-942-3500",
+        "315-942-3212"
+      ],
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Rome Health - Camden Family Care",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "5 Masonic Avenue",
+        "addressLocality": "Camden",
+        "addressRegion": "NY",
+        "postalCode": "13316"
+      },
+      "telephone": "315-245-3192",
+      "medicalSpecialty": ["Family Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Oneida Health Family Care - Camden",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "9562 NY-13",
+        "addressLocality": "Camden",
+        "addressRegion": "NY",
+        "postalCode": "13316"
+      },
+      "telephone": "315-245-5029",
+      "medicalSpecialty": ["Family Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Family Health NP Connections",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "23 Main Street, Suite 2",
+        "addressLocality": "Camden",
+        "addressRegion": "NY",
+        "postalCode": "13316"
+      },
+      "telephone": "315-820-4323",
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "MVHS Medical Group – Waterville Medical Office",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "358 Madison Street",
+        "addressLocality": "Waterville",
+        "addressRegion": "NY",
+        "postalCode": "13480"
+      },
+      "telephone": "315-841-4973",
+      "medicalSpecialty": ["Primary Care"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Waterville Family Health Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "117 West Main Street",
+        "addressLocality": "Waterville",
+        "addressRegion": "NY",
+        "postalCode": "13480"
+      },
+      "telephone": "315-841-4184",
+      "medicalSpecialty": ["Family Health"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "MVHS Medical Group – Whitesboro Medical Office",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "37 Main Street",
+        "addressLocality": "Whitesboro",
+        "addressRegion": "NY",
+        "postalCode": "13492"
+      },
+      "telephone": "315-624-8800",
+      "medicalSpecialty": ["Primary Care", "Laboratory"]
+    },
+    {
+      "@type": "MedicalLaboratory",
+      "name": "Oneida Health Imaging Services",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "321 Genesee Street",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "139 Fields Dr",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "9562 NY-13",
+          "addressLocality": "Camden",
+          "addressRegion": "NY",
+          "postalCode": "13316"
+        }
+      ],
+      "telephone": [
+        "315-361-2345",
+        "315-361-2290",
+        "315-245-2950"
+      ],
+      "serviceType": ["MRI", "3D Mammography", "Ultrasound", "DEXA", "X-Ray"]
+    },
+    {
+      "@type": "MedicalLaboratory",
+      "name": "MVHS Medical Imaging",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Mohawk Valley Health System"
+      },
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "111 Hospital Drive",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "106 Business Park Drive",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "601 State Street",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        }
+      ],
+      "telephone": [
+        "315-917-9966",
+        "315-624-5510"
+      ]
+    },
+    {
+      "@type": "MedicalLaboratory",
+      "name": "Mohawk Glen Radiology",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "91 Perimeter Road West",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13441"
+      },
+      "telephone": "315-334-9729",
+      "serviceType": ["CT", "MRI", "Mammography", "Ultrasound"]
+    },
+    {
+      "@type": "MedicalLaboratory",
+      "name": "Rome Health Breast Imaging Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Chestnut Street campus",
+        "addressLocality": "Rome",
+        "addressRegion": "NY"
+      },
+      "telephone": "315-338-7389",
+      "serviceType": ["Breast Imaging"]
+    },
+    {
+      "@type": "MedicalLaboratory",
+      "name": "Slocum Dickson Breast Care and Mammography",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1729 Burrstone Road",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-798-1440",
+      "serviceType": ["Mammography"]
+    },
+    {
+      "@type": "MedicalLaboratory",
+      "name": "Oxford Medical Imaging",
+      "telephone": "315-738-1795"
+    },
+    {
+      "@type": "MedicalLaboratory",
+      "name": "Labcorp",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "603 Seneca St",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "1614 N James St",
+          "addressLocality": "Rome",
+          "addressRegion": "NY",
+          "postalCode": "13440"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "91 Perimeter Rd",
+          "addressLocality": "Rome",
+          "addressRegion": "NY",
+          "postalCode": "13441"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "95 Genesee St",
+          "addressLocality": "New Hartford",
+          "addressRegion": "NY",
+          "postalCode": "13413"
+        }
+      ],
+      "telephone": "315-361-1334"
+    },
+    {
+      "@type": "MedicalLaboratory",
+      "name": "Quest Diagnostics",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2002 Genesee St",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-735-5636"
+    },
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "name": "Oneida Health Outpatient Therapy",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Oneida Health"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "221 Broad Street",
+        "addressLocality": "Oneida",
+        "addressRegion": "NY",
+        "postalCode": "13421"
+      },
+      "telephone": "315-363-8711",
+      "serviceType": ["Physical Therapy", "Occupational Therapy", "Speech Therapy"]
+    },
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "name": "Rome Health Outpatient Therapy at Chestnut Commons",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "107 East Chestnut Street, Suite 104",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "telephone": "315-337-7952",
+      "serviceType": ["Outpatient Therapy"]
+    },
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "name": "ATW Physical Therapy",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "2504 Genesee St",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "1145 Glenwood Ave",
+          "addressLocality": "Oneida",
+          "addressRegion": "NY",
+          "postalCode": "13421"
+        }
+      ],
+      "telephone": "315-765-0063",
+      "serviceType": ["Orthopedic PT", "Pelvic Health", "Vestibular Rehabilitation"]
+    },
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "name": "Caruso PT",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "3917 Oneida St",
+        "addressLocality": "New Hartford",
+        "addressRegion": "NY",
+        "postalCode": "13413"
+      },
+      "telephone": "315-507-3011",
+      "serviceType": ["Physical Therapy"]
+    },
+    {
+      "@type": "Organization",
+      "name": "988 Suicide & Crisis Lifeline",
+      "telephone": "988",
+      "serviceType": ["24/7 Crisis Support"]
+    },
+    {
+      "@type": "Organization",
+      "name": "Mobile Crisis Assessment Team (MCAT)",
+      "telephone": "315-732-6228",
+      "serviceType": ["In-person Crisis Response"]
+    },
+    {
+      "@type": "Organization",
+      "name": "Veterans Crisis Line",
+      "telephone": "988",
+      "serviceType": ["Veteran Crisis Support"]
+    },
+    {
+      "@type": "Organization",
+      "name": "The Trevor Project",
+      "telephone": "866-488-7386",
+      "serviceType": ["LGBTQ Youth Crisis Intervention"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Beacon Center",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "1508 Genesee St",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "303 W Liberty St",
+          "addressLocality": "Rome",
+          "addressRegion": "NY",
+          "postalCode": "13440"
+        }
+      ],
+      "telephone": [
+        "315-366-4100",
+        "315-367-1290"
+      ],
+      "medicalSpecialty": ["Addiction Treatment"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Helio Health",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "500 Whitesboro St",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "1213 Court St",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        }
+      ],
+      "telephone": [
+        "315-724-5168",
+        "315-624-9835"
+      ],
+      "medicalSpecialty": ["Addiction Treatment"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Community Recovery Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "264 W Dominick St, Liberty Plaza",
+        "addressLocality": "Rome",
+        "addressRegion": "NY",
+        "postalCode": "13440"
+      },
+      "telephone": "315-334-4701",
+      "medicalSpecialty": ["Addiction Treatment"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "McPike Addiction Treatment Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1213 Court St",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-738-4465",
+      "medicalSpecialty": ["Inpatient Addiction Treatment"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Addiction Stabilization Center – Rescue Mission",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "210 Lansing St",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13501"
+      },
+      "telephone": "315-735-1645",
+      "medicalSpecialty": ["Addiction Stabilization"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Catholic Charities",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1408 Genesee St",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-724-2158",
+      "medicalSpecialty": ["Residential Addiction Treatment"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Neighborhood Center",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "628 Mary St",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13501"
+      },
+      "telephone": "315-272-2700",
+      "medicalSpecialty": ["Psychiatry", "Counseling"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Community Health and Behavioral Services (UCP)",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1002 Oswego St",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13502"
+      },
+      "telephone": "315-798-8868",
+      "medicalSpecialty": ["Mental Health", "Substance Use"]
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Center for Family Life and Recovery",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "502 Court St, #401",
+          "addressLocality": "Utica",
+          "addressRegion": "NY",
+          "postalCode": "13502"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "510 Erie Blvd West",
+          "addressLocality": "Rome",
+          "addressRegion": "NY",
+          "postalCode": "13440"
+        }
+      ],
+      "telephone": [
+        "315-733-1709",
+        "315-336-3090"
+      ],
+      "medicalSpecialty": ["Counseling", "Recovery"]
+    },
+    {
+      "@type": "GovernmentOrganization",
+      "name": "Oneida County Department of Mental Health",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "800 Park Avenue, 7th Floor",
+        "addressLocality": "Utica",
+        "addressRegion": "NY",
+        "postalCode": "13501"
+      },
+      "telephone": "315-768-3660",
+      "serviceType": ["Referral Service"]
+    },
+    {
+      "@type": "Organization",
+      "name": "Mohawk Valley Health System",
+      "description": "Largest integrated provider serving Oneida, Herkimer, Madison counties.",
+      "url": "https://mvhealthsystem.org"
+    },
+    {
+      "@type": "Organization",
+      "name": "Oneida Health",
+      "description": "Circle of Care network in western Oneida County.",
+      "url": "https://oneidahealth.org"
+    },
+    {
+      "@type": "Organization",
+      "name": "Rome Health",
+      "description": "Primary acute care for Rome community.",
+      "url": "https://romehealth.org"
+    }
+  ]
+}

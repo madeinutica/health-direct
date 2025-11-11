@@ -1,0 +1,160 @@
+[
+  {
+    "id": "wynn-hospital",
+    "type": "Hospital",
+    "name": "Wynn Hospital",
+    "description": "Full-service hospital providing comprehensive medical care including emergency services, surgery, cardiology, and specialized care to the greater Utica area.",
+    "address": {
+      "streetAddress": "111 Hospital Drive",
+      "addressLocality": "Utica",
+      "addressRegion": "NY",
+      "postalCode": "13502"
+    },
+    "telephone": "315-917-9966",
+    "website": "https://mvhealthsystem.org",
+    "email": "info@mvhealthsystem.org",
+    "medicalSpecialty": ["Emergency Medicine", "Cardiology", "Surgery", "Internal Medicine", "Pediatrics", "Orthopedics", "Neurology"],
+    "serviceType": ["Emergency Care", "Inpatient Care", "Outpatient Care", "Surgical Services", "Diagnostic Imaging"],
+    "isEmergency": true,
+    "is24Hours": true,
+    "acceptsInsurance": ["Medicare", "Medicaid", "Blue Cross Blue Shield", "Aetna", "United Healthcare"],
+    "languagesSpoken": ["English", "Spanish", "Arabic"]
+  },
+  {
+    "id": "wellnow-urgent-care-utica",
+    "type": "MedicalClinic",
+    "name": "WellNow Urgent Care - Utica",
+    "description": "Walk-in urgent care clinic providing immediate medical attention for non-life threatening conditions, X-rays, physicals, and occupational health services.",
+    "address": {
+      "streetAddress": "230 North Genesee Street",
+      "addressLocality": "Utica",
+      "addressRegion": "NY",
+      "postalCode": "13502"
+    },
+    "telephone": "315-275-3214",
+    "website": "https://wellnow.com",
+    "medicalSpecialty": ["Urgent Care", "Occupational Medicine", "Travel Medicine"],
+    "serviceType": ["Urgent Care", "X-rays", "Physicals", "Vaccinations", "STD Testing"],
+    "isEmergency": false,
+    "is24Hours": false,
+    "acceptsInsurance": ["Medicare", "Medicaid", "Most Commercial Insurance"],
+    "languagesSpoken": ["English", "Spanish"]
+  },
+  {
+    "id": "dr-sarah-johnson",
+    "type": "Physician",
+    "name": "Dr. Sarah Johnson, MD",
+    "description": "Board-certified family medicine physician providing comprehensive primary care for patients of all ages, including preventive care, chronic disease management, and wellness services.",
+    "address": {
+      "streetAddress": "1656 Champlin Avenue",
+      "addressLocality": "Utica",
+      "addressRegion": "NY",
+      "postalCode": "13502"
+    },
+    "telephone": "315-624-6000",
+    "medicalSpecialty": ["Family Medicine", "Internal Medicine", "Preventive Care"],
+    "serviceType": ["Primary Care", "Annual Physicals", "Chronic Disease Management", "Preventive Care"],
+    "isEmergency": false,
+    "is24Hours": false,
+    "acceptsInsurance": ["Medicare", "Medicaid", "Blue Cross Blue Shield", "Excellus"],
+    "languagesSpoken": ["English"]
+  },
+  {
+    "id": "rome-memorial-hospital",
+    "type": "Hospital",
+    "name": "Rome Memorial Hospital",
+    "description": "Leading healthcare provider in the Mohawk Valley offering comprehensive medical services including emergency care, surgery, maternity services, and specialized care.",
+    "address": {
+      "streetAddress": "1500 N James St",
+      "addressLocality": "Rome",
+      "addressRegion": "NY",
+      "postalCode": "13440"
+    },
+    "telephone": "315-338-7000",
+    "website": "https://romehospital.org",
+    "medicalSpecialty": ["Emergency Medicine", "Surgery", "Obstetrics", "Cardiology", "Orthopedics", "Radiology"],
+    "serviceType": ["Emergency Care", "Surgical Services", "Maternity Care", "Diagnostic Services", "Rehabilitation"],
+    "isEmergency": true,
+    "is24Hours": true,
+    "acceptsInsurance": ["Medicare", "Medicaid", "Commercial Insurance"],
+    "languagesSpoken": ["English", "Spanish"]
+  },
+  {
+    "id": "st-elizabeth-medical-center",
+    "type": "MedicalCenter",
+    "name": "St. Elizabeth Medical Center",
+    "description": "Comprehensive medical center providing specialized care in multiple disciplines including cardiology, oncology, orthopedics, and women's health services.",
+    "address": {
+      "streetAddress": "2209 Genesee St",
+      "addressLocality": "Utica",
+      "addressRegion": "NY",
+      "postalCode": "13501"
+    },
+    "telephone": "315-798-8100",
+    "website": "https://stemc.org",
+    "medicalSpecialty": ["Cardiology", "Oncology", "Orthopedics", "Women's Health", "Gastroenterology"],
+    "serviceType": ["Specialty Care", "Diagnostic Services", "Outpatient Surgery", "Cancer Care"],
+    "isEmergency": false,
+    "is24Hours": false,
+    "acceptsInsurance": ["Medicare", "Medicaid", "Most Major Insurance Plans"],
+    "languagesSpoken": ["English", "Italian", "Spanish"]
+  },
+  {
+    "id": "mohawk-valley-health-system-lab",
+    "type": "MedicalLaboratory",
+    "name": "Mohawk Valley Health System Laboratory",
+    "description": "Full-service medical laboratory providing comprehensive diagnostic testing services including blood work, pathology, microbiology, and specialized testing.",
+    "address": {
+      "streetAddress": "1676 Sunset Ave",
+      "addressLocality": "Utica",
+      "addressRegion": "NY",
+      "postalCode": "13502"
+    },
+    "telephone": "315-624-5800",
+    "medicalSpecialty": ["Clinical Laboratory", "Pathology", "Microbiology"],
+    "serviceType": ["Blood Tests", "Pathology Services", "Microbiology", "Molecular Testing", "Toxicology"],
+    "isEmergency": false,
+    "is24Hours": false,
+    "acceptsInsurance": ["Medicare", "Medicaid", "Commercial Insurance"],
+    "languagesSpoken": ["English"]
+  },
+  {
+    "id": "oneida-healthcare",
+    "type": "Hospital",
+    "name": "Oneida Healthcare",
+    "description": "Community hospital serving Oneida and surrounding areas with emergency services, medical, surgical, and specialty care including rehabilitation services.",
+    "address": {
+      "streetAddress": "321 Genesee St",
+      "addressLocality": "Oneida",
+      "addressRegion": "NY",
+      "postalCode": "13421"
+    },
+    "telephone": "315-363-6000",
+    "website": "https://oneidahealthcare.org",
+    "medicalSpecialty": ["Emergency Medicine", "Surgery", "Internal Medicine", "Rehabilitation", "Radiology"],
+    "serviceType": ["Emergency Care", "Surgical Services", "Rehabilitation", "Diagnostic Imaging", "Laboratory Services"],
+    "isEmergency": true,
+    "is24Hours": true,
+    "acceptsInsurance": ["Medicare", "Medicaid", "Blue Cross Blue Shield", "Excellus"],
+    "languagesSpoken": ["English"]
+  },
+  {
+    "id": "central-new-york-pediatrics",
+    "type": "Physician",
+    "name": "Central New York Pediatrics",
+    "description": "Specialized pediatric practice providing comprehensive healthcare for infants, children, and adolescents including well-child visits, immunizations, and acute care.",
+    "address": {
+      "streetAddress": "49 Kellogg Rd",
+      "addressLocality": "New Hartford",
+      "addressRegion": "NY",
+      "postalCode": "13413"
+    },
+    "telephone": "315-732-8390",
+    "medicalSpecialty": ["Pediatrics", "Adolescent Medicine"],
+    "serviceType": ["Well-Child Visits", "Immunizations", "Sick Visits", "Sports Physicals", "Developmental Assessments"],
+    "isEmergency": false,
+    "is24Hours": false,
+    "acceptsInsurance": ["Medicare", "Medicaid", "Most Commercial Insurance"],
+    "languagesSpoken": ["English", "Spanish"]
+  }
+]

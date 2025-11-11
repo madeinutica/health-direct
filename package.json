@@ -1,0 +1,50 @@
+{
+  "name": "healthdirect",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "setup-db": "node scripts/setup-database.js",
+    "run-migration": "node scripts/run-migration.js",
+    "prepare-import": "node scripts/prepare-import.js",
+    "import-data": "node scripts/import-data.js",
+    "add-geo-columns": "node scripts/add-geo-columns.js",
+    "setup-geolocation": "node scripts/setup-geolocation.js",
+    "geocode-providers": "node scripts/geocode-providers.js",
+    "deploy-check": "node scripts/deploy-helper.js"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.5",
+    "@radix-ui/react-avatar": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-select": "^2.1.2",
+    "@radix-ui/react-slider": "^1.2.1",
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "@types/mapbox-gl": "^3.4.1",
+    "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
+    "lucide-react": "^0.451.0",
+    "mapbox-gl": "^3.16.0",
+    "next": "^15.5.6",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-map-gl": "^8.1.0",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.24",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}
