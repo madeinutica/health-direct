@@ -88,3 +88,32 @@ export interface PostReply {
   createdAt: string
   updatedAt: string
 }
+
+// Processed provider type for frontend display
+export interface ProcessedProvider {
+  id: string
+  name: string
+  category: string
+  organization: string
+  address: string
+  location: string
+  phone: string
+  website: string
+  specialties: string[]
+  services: string[]
+  rating?: number
+  reviewCount?: number
+  isEmergency: boolean
+  is24Hours: boolean
+  acceptsInsurance: string[]
+  acceptsMedicaid: boolean
+  acceptsMedicare: boolean
+  network: string
+  latitude?: number
+  longitude?: number
+}
+
+// Raw data structure for healthcare data JSON
+export interface HealthcareData {
+  containsPlace: HealthcareProvider[]
+}

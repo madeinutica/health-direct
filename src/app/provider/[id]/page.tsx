@@ -1,55 +1,154 @@
 'use client'
 
-import { useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 import { 
   MapPinIcon,
-  UserIcon,
-  GlobeAltIcon
+  PhoneIcon,
+  GlobeAltIcon,
+  BuildingOffice2Icon,
+  HeartIcon,
+  ShareIcon,
+  ShieldCheckIcon,
+  ArrowLeftIcon
 } from '@heroicons/react/24/outline'
-import { StarIcon as StarSolidIcon } from '@heroicons/react/24/solid'
+import { StarIcon as StarSolidIcon, HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid'
 import dynamic from 'next/dynamic'
+import type { HealthcareProvider } from '@/types'
 
 // Dynamically import Map component to avoid SSR issues
 const Map = dynamic(() => import('@/components/Map'), { ssr: false })
 
 export default function ProviderDetailPage() {
   const params = useParams()
+  const router = useRouter()
+  const [provider, setProvider] = useState<HealthcareProvider | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [isFavorite, setIsFavorite] = useState(false)
 
-  // Mock provider data - in real app, fetch from Supabase using params.id
-  const provider = {
-    id: '1',
-    type: 'Hospital' as const,
-    name: 'Wynn Hospital',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-    address: {
-      streetAddress: '111 Hospital Drive',
-      addressLocality: 'Utica',
-      addressRegion: 'NY',
-      postalCode: '13502'
-    },
-    latitude: 43.1009,
-    longitude: -75.2327,
-    telephone: '315-917-9966',
-    website: 'https://mvhealthsystem.org',
-    medicalSpecialty: ['Emergency', 'Cardiology', 'Surgery', 'Oncology', 'Pediatrics'],
-    rating: 5.0,
-    reviewCount: 643,
-    isEmergency: true,
-    is24Hours: true,
-    priceRange: '$50 - $70',
-    imageUrl: '/placeholder-hospital.jpg'
+  useEffect(() => {
+    if (!params?.id) return
+
+    // Fetch provider data from API
+    fetch('/api/healthcare-providers')
+      .then(res => res.json())
+      .then(data => {
+        const found = data.providers.find((p: HealthcareProvider) => p.id === params.id)
+        setProvider(found || null)
+        setLoading(false)
+
+        // Check if favorited
+        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]')
+        setIsFavorite(favorites.includes(params.id))
+      })
+      .catch(err => {
+        console.error('Error loading provider:', err)
+        setLoading(false)
+      })
+  }, [params?.id])
+
+  const toggleFavorite = () => {
+    if (!params?.id) return
+
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]')
+    let newFavorites
+
+    if (isFavorite) {
+      newFavorites = favorites.filter((id: string) => id !== params.id)
+    } else {
+      newFavorites = [...favorites, params.id]
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(newFavorites))
+    setIsFavorite(!isFavorite)
   }
 
+  const handleShare = () => {
+    if (navigator.share && provider) {
+      navigator.share({
+        title: provider.name,
+        text: `Check out ${provider.name} in Oneida County Healthcare Directory`,
+        url: window.location.href
+      })
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading provider details...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!provider) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center px-4">
+          <div className="text-5xl mb-4">❌</div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Provider Not Found</h2>
+          <p className="text-gray-600 mb-6">The provider you're looking for doesn't exist.</p>
+          <button
+            onClick={() => router.push('/directory')}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+          >
+            Back to Directory
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  const address = Array.isArray(provider.address) ? provider.address[0] : provider.address
+  const phone = Array.isArray(provider.telephone) ? provider.telephone[0] : provider.telephone
+  const fullAddress = address 
+    ? `${address.streetAddress || ''}, ${address.addressLocality}, ${address.addressRegion} ${address.postalCode || ''}`.trim()
+    : ''
+
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-gray-50 pb-20">
+      {/* Header with Back Button */}
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <div className="px-4 py-3">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => router.back()}
+              className="p-2 -ml-2 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              <ArrowLeftIcon className="w-6 h-6 text-gray-900" />
+            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={handleShare}
+                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <ShareIcon className="w-6 h-6 text-gray-900" />
+              </button>
+              <button
+                onClick={toggleFavorite}
+                className="p-2 -mr-2 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                {isFavorite ? (
+                  <HeartIconSolid className="w-6 h-6 text-red-500" />
+                ) : (
+                  <HeartIcon className="w-6 h-6 text-gray-900" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Image Section */}
-      <div className="relative w-full h-64 bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-500">
-        {/* Placeholder for hero image */}
+      <div className="relative w-full h-48 bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-500">
         <div className="absolute inset-0 bg-black/20"></div>
         
         {/* Rating Badge */}
-        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur rounded-lg px-3 py-2 shadow-lg">
+        {provider.rating && (
+          <div className="absolute top-4 left-4 bg-white/95 backdrop-blur rounded-lg px-3 py-2 shadow-lg">
           <div className="flex items-center space-x-1">
             {[1, 2, 3, 4, 5].map((star) => (
               <StarSolidIcon
