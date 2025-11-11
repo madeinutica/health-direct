@@ -9,6 +9,8 @@ import SearchPage from "./pages/SearchPage";
 import MapPage from "./pages/MapPage";
 import AssistantPage from "./pages/AssistantPage";
 import ProviderDetail from "./pages/ProviderDetail";
+import ProfilePage from "./pages/ProfilePage"; // Import the new ProfilePage
+import { UserProfileProvider } from "./contexts/UserProfileContext"; // Import UserProfileProvider
 
 function Router() {
   return (
@@ -16,7 +18,8 @@ function Router() {
       <Route path={"/"} component={NewHome} />
       <Route path={"/search"} component={SearchPage} />
       <Route path={"/map"} component={MapPage} />
-        <Route path="/assistant" component={AssistantPage} />
+      <Route path="/assistant" component={AssistantPage} />
+      <Route path="/profile" component={ProfilePage} /> {/* Add route for ProfilePage */}
       <Route path={"/provider/:id"} component={ProviderDetail} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
@@ -37,10 +40,12 @@ function App() {
         defaultTheme="light"
         // switchable
       >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <UserProfileProvider> {/* Wrap with UserProfileProvider */}
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </UserProfileProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

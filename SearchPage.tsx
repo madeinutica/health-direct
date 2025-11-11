@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Search as SearchIcon, SlidersHorizontal, X } from 'lucide-react';
+import { Search as SearchIcon, SlidersHorizontal, X, Shield } from 'lucide-react'; // Import Shield icon
 import { useLocation, useSearch } from 'wouter';
 import TabBar from '@/components/TabBar';
 import ProviderCard from '@/components/ProviderCard';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox'; // Import Checkbox
+import { Label } from '@/components/ui/label'; // Import Label
 import { processProviders, filterProviders, getUniqueLocations, getUniqueCategories } from '@/lib/dataUtils';
 import type { HealthcareData, ProcessedProvider } from '@/lib/types';
+import { useUserProfile } from '@/contexts/UserProfileContext'; // Import useUserProfile
 
 export default function SearchPage() {
   const searchParams = useSearch();
@@ -22,6 +25,9 @@ export default function SearchPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [locations, setLocations] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const [filterInNetwork, setFilterInNetwork] = useState(false); // New state for in-network filter
+
+  const { profile } = useUserProfile(); // Get user profile from context
 
   // Load data
   useEffect(() => {
@@ -44,17 +50,36 @@ export default function SearchPage() {
 
   // Filter data when search/filters change
   useEffect(() => {
-    const filtered = filterProviders(data, searchQuery, selectedCategory, selectedLocation);
+    const filtered = filterProviders(
+      data,
+      searchQuery,
+      selectedCategory,
+      selectedLocation,
+      profile.selectedInsurancePlans,
+      profile.acceptsMedicaid,
+      profile.acceptsMedicare,
+      filterInNetwork // Pass new filter state
+    );
     setFilteredData(filtered);
-  }, [data, searchQuery, selectedCategory, selectedLocation]);
+  }, [
+    data,
+    searchQuery,
+    selectedCategory,
+    selectedLocation,
+    profile.selectedInsurancePlans,
+    profile.acceptsMedicaid,
+    profile.acceptsMedicare,
+    filterInNetwork
+  ]);
 
   const handleClearFilters = () => {
     setSearchQuery('');
     setSelectedCategory('All');
     setSelectedLocation('All');
+    setFilterInNetwork(false); // Clear new filter state
   };
 
-  const hasActiveFilters = searchQuery || selectedCategory !== 'All' || selectedLocation !== 'All';
+  const hasActiveFilters = searchQuery || selectedCategory !== 'All' || selectedLocation !== 'All' || filterInNetwork;
 
   if (loading) {
     return (
@@ -134,6 +159,21 @@ export default function SearchPage() {
                   ))}
                 </select>
               </div>
+
+              {/* In-Network Filter */}
+              {(profile.selectedInsurancePlans.length > 0 || profile.acceptsMedicaid || profile.acceptsMedicare) && (
+                <div className="flex items-center space-x-2 pt-2">
+                  <Checkbox
+                    id="filter-in-network"
+                    checked={filterInNetwork}
+                    onCheckedChange={(checked) => setFilterInNetwork(checked as boolean)}
+                  />
+                  <Label htmlFor="filter-in-network" className="text-body font-medium flex items-center gap-2">
+                    <Shield className="w-5 h-5 text-primary" />
+                    Show In-Network Providers
+                  </Label>
+                </div>
+              )}
 
               {hasActiveFilters && (
                 <Button

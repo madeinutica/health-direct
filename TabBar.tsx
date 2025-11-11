@@ -1,4 +1,4 @@
-import { Home, Map, Search, Sparkles } from 'lucide-react';
+import { Home, Map, Search, Sparkles, User } from 'lucide-react'; // Import User icon
 import { useLocation, Link } from 'wouter';
 
 export default function TabBar() {
@@ -9,6 +9,7 @@ export default function TabBar() {
     { id: 'map', label: 'Map', icon: Map, path: '/map' },
     { id: 'search', label: 'Search', icon: Search, path: '/search' },
     { id: 'assistant', label: 'Assistant', icon: Sparkles, path: '/assistant' },
+    { id: 'profile', label: 'Profile', icon: User, path: '/profile' }, // New Profile tab
   ];
 
   return (
