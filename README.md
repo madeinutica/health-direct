@@ -33,7 +33,7 @@ src/
 │   ├── community/         # Community features  
 │   ├── reviews/           # Review system
 │   ├── provider/          # Individual provider pages
-│   └── api/chat/         # AI concierge API
+│   └── api/              # API routes
 ├── components/           # Reusable UI components
 │   ├── DirectorySearch.tsx
 │   ├── Map.tsx
