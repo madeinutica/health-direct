@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { PaperAirplaneIcon, HeartIcon, ShieldCheckIcon, StarIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/navigation'
+import { MyHealthProvider } from '@/components/MyHealthProvider'
 
 export default function HomePage() {
   const [inputValue, setInputValue] = useState('')
@@ -40,6 +41,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <div className="px-4 py-6 mx-auto max-w-7xl">
+        {/* My Health Provider Section */}
+        <MyHealthProvider />
+
         {/* Hero Chat Section */}
         <div className="mb-6">
           {/* Hero Header */}
