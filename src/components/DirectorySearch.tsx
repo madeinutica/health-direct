@@ -482,7 +482,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 bg-white"
                   >
                     {categories.map((category) => (
                       <option key={category.id} value={category.id}>
@@ -499,7 +499,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
                   <select
                     value={selectedSpecialty}
                     onChange={(e) => setSelectedSpecialty(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 bg-white"
                   >
                     {specialties.map((specialty) => (
                       <option key={specialty.id} value={specialty.id}>
@@ -516,7 +516,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
                   <select
                     value={selectedInsurance}
                     onChange={(e) => setSelectedInsurance(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 bg-white"
                   >
                     {insuranceOptions.map((insurance) => (
                       <option key={insurance.id} value={insurance.id}>
@@ -533,7 +533,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
                   <select
                     value={selectedLocation}
                     onChange={(e) => setSelectedLocation(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 bg-white"
                   >
                     {locationOptions.map((location) => (
                       <option key={location.id} value={location.id}>
@@ -550,7 +550,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
                   <select
                     value={minRating}
                     onChange={(e) => setMinRating(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 bg-white"
                   >
                     <option value={0}>All Ratings</option>
                     <option value={3}>3+ Stars</option>
