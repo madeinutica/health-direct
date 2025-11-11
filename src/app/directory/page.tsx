@@ -33,6 +33,12 @@ function DirectoryContent() {
       setConversationHistory([
         { type: 'assistant', content: `I see you have ${insuranceParam} insurance and you're looking for: ${needsParam}. Let me help you find the perfect provider. You can ask me to refine your search further!` }
       ])
+      
+      // Set initial filters based on URL params
+      setAiFilters({
+        insurance: insuranceParam,
+        searchQuery: needsParam
+      })
     }
   }, [insuranceParam, needsParam])
 

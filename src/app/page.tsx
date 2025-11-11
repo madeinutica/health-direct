@@ -249,84 +249,88 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Featured Provider Card */}
-        <div 
-          onClick={() => router.push('/directory')}
-          className="relative rounded-2xl overflow-hidden mb-6 shadow-xl cursor-pointer transform transition-transform hover:scale-[1.02] max-w-4xl mx-auto"
-        >
-          {/* Background Image */}
-          <div className="relative h-56 lg:h-72">
-            <Image 
-              src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80" 
-              alt="Hospital"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 via-purple-600/80 to-pink-500/80"></div>
-            
-            {/* Content Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-between p-6 lg:p-8 text-white">
-              {/* Top Badge */}
-              <div className="flex justify-between items-start">
-                <div className="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs lg:text-sm font-bold">
-                  ⭐ 5.0 Featured Provider
-                </div>
-              </div>
-
-              {/* Bottom Content */}
-              <div>
-                <h3 className="text-2xl lg:text-4xl font-extrabold mb-2 tracking-tight">
-                  Upstate University Hospital
-                </h3>
-                <p className="text-white/90 text-sm lg:text-base font-medium mb-3">
-                  Emergency Care • Trauma Center • Top Rated
-                </p>
-                <div className="inline-block bg-white text-purple-600 px-5 py-2 rounded-full text-sm lg:text-base font-bold">
-                  Learn More →
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Featured Card */}
-        <div className="bg-white rounded-2xl overflow-hidden mb-6 border-2 border-gray-200 shadow-sm max-w-4xl mx-auto">
-          <div className="p-6 lg:p-8">
-            <div className="flex items-center space-x-2 mb-3">
-              <ShieldCheckIcon className="h-5 w-5 lg:h-6 lg:w-6 text-blue-600" />
-              <span className="text-xs lg:text-sm font-bold uppercase tracking-wider text-blue-600">Insurance Match</span>
-            </div>
-            <h3 className="text-xl lg:text-2xl font-extrabold mb-2 text-blue-600 tracking-tight">
-              Finding providers accepting your insurance
-            </h3>
-            <p className="text-sm lg:text-base text-gray-600 mb-4 font-medium">
-              Search by plan and specialty
-            </p>
-            <button 
-              onClick={() => router.push('/directory')}
-              className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm lg:text-base font-bold hover:bg-blue-700 transition-colors shadow-md"
-            >
-              Explore →
-            </button>
-          </div>
-        </div>
-
-        {/* Quick Searches */}
-        {/* Info Card */}
-        <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 lg:p-8 text-white shadow-lg max-w-4xl mx-auto">
-          <HeartIcon className="h-8 w-8 lg:h-10 lg:w-10 mb-3" />
-          <h3 className="text-xl lg:text-2xl font-extrabold mb-2 tracking-tight">
-            Quality care starts here
-          </h3>
-          <p className="text-sm lg:text-base text-blue-100 mb-4 font-medium">
-            Browse verified providers in Central New York
-          </p>
-          <button 
+        {/* Three Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {/* Featured Provider Card */}
+          <div 
             onClick={() => router.push('/directory')}
-            className="text-sm lg:text-base font-bold text-white border-2 border-white px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 transition-colors"
+            className="relative rounded-2xl overflow-hidden shadow-xl cursor-pointer transform transition-transform hover:scale-[1.02] flex flex-col"
           >
-            Learn More
-          </button>
+            {/* Background Image */}
+            <div className="relative h-56 lg:flex-1 lg:min-h-[320px]">
+              <Image 
+                src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80" 
+                alt="Hospital"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 via-purple-600/80 to-pink-500/80"></div>
+              
+              {/* Content Overlay */}
+              <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
+                {/* Top Badge */}
+                <div className="flex justify-between items-start">
+                  <div className="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold">
+                    ⭐ 5.0 Featured Provider
+                  </div>
+                </div>
+
+                {/* Bottom Content */}
+                <div>
+                  <h3 className="text-xl lg:text-2xl font-extrabold mb-2 tracking-tight">
+                    Upstate University Hospital
+                  </h3>
+                  <p className="text-white/90 text-sm font-medium mb-3">
+                    Emergency Care • Trauma Center • Top Rated
+                  </p>
+                  <div className="inline-block bg-white text-purple-600 px-4 py-2 rounded-full text-sm font-bold">
+                    Learn More →
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Insurance Match Card */}
+          <div className="bg-white rounded-2xl overflow-hidden border-2 border-gray-200 shadow-sm flex flex-col">
+            <div className="p-6 flex-1 flex flex-col">
+              <div className="flex items-center space-x-2 mb-3">
+                <ShieldCheckIcon className="h-5 w-5 text-blue-600" />
+                <span className="text-xs font-bold uppercase tracking-wider text-blue-600">Insurance Match</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-extrabold mb-2 text-blue-600 tracking-tight">
+                Finding providers accepting your insurance
+              </h3>
+              <p className="text-sm text-gray-600 mb-4 font-medium flex-1">
+                Search by plan and specialty
+              </p>
+              <button 
+                onClick={() => router.push('/directory')}
+                className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-blue-700 transition-colors shadow-md w-full lg:w-auto"
+              >
+                Explore →
+              </button>
+            </div>
+          </div>
+
+          {/* Info Card */}
+          <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl text-white shadow-lg flex flex-col">
+            <div className="p-6 flex-1 flex flex-col">
+              <HeartIcon className="h-8 w-8 mb-3" />
+              <h3 className="text-xl lg:text-2xl font-extrabold mb-2 tracking-tight">
+                Quality care starts here
+              </h3>
+              <p className="text-sm text-blue-100 mb-4 font-medium flex-1">
+                Browse verified providers in Central New York
+              </p>
+              <button 
+                onClick={() => router.push('/directory')}
+                className="text-sm font-bold text-white border-2 border-white px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 transition-colors w-full lg:w-auto"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
