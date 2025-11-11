@@ -39,7 +39,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <div className="px-4 py-6">
+      <div className="px-4 py-6 mx-auto max-w-7xl">
         {/* Hero Chat Section */}
         <div className="mb-6">
           {/* Hero Header */}
@@ -53,7 +53,7 @@ export default function HomePage() {
           </div>
           
           {/* Chat Input Card */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 mb-5">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 mb-5 max-w-4xl mx-auto">
             <form onSubmit={handleSendMessage} className="p-5">
               <div className="relative">
                 <textarea
@@ -75,7 +75,7 @@ export default function HomePage() {
           </div>
 
           {/* Prompt Slider */}
-          <div>
+          <div className="max-w-4xl mx-auto">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 px-1">
               Quick Prompts
             </p>
@@ -98,7 +98,7 @@ export default function HomePage() {
         {/* Featured Provider Card */}
         <div 
           onClick={() => router.push('/directory')}
-          className="relative rounded-2xl overflow-hidden mb-6 shadow-xl cursor-pointer transform transition-transform hover:scale-[1.02]"
+          className="relative rounded-2xl overflow-hidden mb-6 shadow-xl cursor-pointer transform transition-transform hover:scale-[1.02] max-w-4xl mx-auto"
         >
           {/* Background Image */}
           <div className="relative h-56">
@@ -135,7 +135,7 @@ export default function HomePage() {
         </div>
 
         {/* Featured Card */}
-        <div className="bg-white rounded-2xl overflow-hidden mb-6 border-2 border-gray-200 shadow-sm">
+        <div className="bg-white rounded-2xl overflow-hidden mb-6 border-2 border-gray-200 shadow-sm max-w-4xl mx-auto">
           <div className="p-6">
             <div className="flex items-center space-x-2 mb-3">
               <ShieldCheckIcon className="h-5 w-5 text-blue-600" />
@@ -157,7 +157,7 @@ export default function HomePage() {
         </div>
 
         {/* Quick Searches */}
-        <div className="mb-6">
+        <div className="mb-6 max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-extrabold text-gray-900 tracking-tight">Quick Searches</h3>
             <button 
@@ -184,7 +184,7 @@ export default function HomePage() {
         </div>
 
         {/* Info Card */}
-        <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 text-white shadow-lg">
+        <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 text-white shadow-lg max-w-4xl mx-auto">
           <HeartIcon className="h-8 w-8 mb-3" />
           <h3 className="text-xl font-extrabold mb-2 tracking-tight">
             Quality care starts here

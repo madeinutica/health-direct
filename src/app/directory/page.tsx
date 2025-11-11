@@ -30,7 +30,7 @@ function DirectoryContent() {
     <div className="min-h-screen bg-gray-50">
       {/* Chat Guidance Header */}
       <div className="bg-white border-b border-gray-200">
-        <div className="px-4 py-4">
+        <div className="px-4 py-4 mx-auto max-w-7xl">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center space-x-3 mb-4">
               <SparklesIcon className="h-6 w-6 text-primary-600" />
@@ -77,7 +77,7 @@ function DirectoryContent() {
 
       {/* Page Header */}
       <div className="bg-white border-b border-gray-100">
-        <div className="px-4 py-4 text-center">
+        <div className="px-4 py-4 text-center mx-auto max-w-7xl">
           <h1 className="text-xl font-bold text-gray-900 mb-1">
             Healthcare Directory
           </h1>

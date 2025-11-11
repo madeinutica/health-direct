@@ -20,7 +20,9 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-50`}>
         <Navigation />
         <main className="min-h-screen pb-safe pt-[30px]">
-          {children}
+          <div className="mx-auto max-w-screen-2xl">
+            {children}
+          </div>
         </main>
       </body>
     </html>
