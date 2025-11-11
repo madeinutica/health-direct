@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { MagnifyingGlassIcon, FunnelIcon, MapIcon, ListBulletIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/24/solid'
@@ -124,11 +124,17 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
   const [loading, setLoading] = useState(false)
   const [selectedProvider, setSelectedProvider] = useState<HealthcareProvider | undefined>(undefined)
   const router = useRouter()
+  const onSearchResultsRef = useRef(onSearchResults)
   
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   )
+
+  // Update the ref when the callback changes
+  useEffect(() => {
+    onSearchResultsRef.current = onSearchResults
+  }, [onSearchResults])
 
   const categories = [
     { id: 'all', label: 'All Providers' },
@@ -229,17 +235,17 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
           }
         ]
         setProviders(mockResults)
-        onSearchResults?.(mockResults)
+        onSearchResultsRef.current?.(mockResults)
       } else {
         setProviders(data || [])
-        onSearchResults?.(data || [])
+        onSearchResultsRef.current?.(data || [])
       }
     } catch (error) {
       console.error('Search error:', error)
     } finally {
       setLoading(false)
     }
-  }, [searchQuery, selectedCategory, selectedSpecialty, supabase, onSearchResults])
+  }, [searchQuery, selectedCategory, selectedSpecialty, supabase]) // Removed onSearchResults from dependencies
 
   useEffect(() => {
     if (initialProviders.length === 0) {
@@ -251,16 +257,20 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
     await fetchProviders()
   }
 
-  const handleProviderClick = (provider: HealthcareProvider) => {
+  const handleProviderClick = useCallback((provider: HealthcareProvider) => {
     setSelectedProvider(provider)
     if (viewMode === 'list') {
       setViewMode('map')
     }
-  }
+  }, [viewMode])
 
-  const handleProviderCardClick = (provider: HealthcareProvider) => {
+  const handleProviderCardClick = useCallback((provider: HealthcareProvider) => {
     router.push(`/provider/${provider.id}`)
-  }
+  }, [router])
+
+  const handleMapClick = useCallback((provider: HealthcareProvider) => {
+    handleProviderClick(provider)
+  }, [handleProviderClick])
 
   return (
     <div className="bg-white">
@@ -383,7 +393,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
               <Map
                 providers={providers}
                 selectedProvider={selectedProvider}
-                onProviderClick={setSelectedProvider}
+                onProviderClick={handleProviderClick}
                 height="600px"
                 className="rounded-lg shadow-lg"
               />
@@ -455,7 +465,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
                   key={provider.id}
                   provider={provider}
                   onClick={() => handleProviderCardClick(provider)}
-                  onMapClick={() => handleProviderClick(provider)}
+                  onMapClick={() => handleMapClick(provider)}
                 />
               ))}
             </div>
