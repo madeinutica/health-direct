@@ -64,12 +64,15 @@ function DirectoryContent() {
 
       if (response.ok) {
         const data = await response.json()
+        console.log('📥 Received from API:', data)
         setConversationHistory(prev => [...prev, { type: 'assistant', content: data.message }])
         
         // Apply AI-generated filters
         if (data.filters) {
-          console.log('AI returned filters:', data.filters)
+          console.log('🎯 AI returned filters:', data.filters)
           setAiFilters(data.filters)
+        } else {
+          console.warn('⚠️ No filters in API response')
         }
       } else {
         throw new Error('Failed to get response')

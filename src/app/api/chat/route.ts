@@ -43,30 +43,48 @@ YOUR CAPABILITIES:
 5. **Urgency Assessment**: Determine if users need emergency care, urgent care, or can schedule regular appointments
 
 RESPONSE FORMAT:
-When recommending providers, be specific and use this structure:
-- **Directly name 2-3 specific providers** from our database that best match their needs
-- Explain WHY each provider is a good match (specialty, location, insurance, ratings)
-- Provide actionable next steps (e.g., "I can filter the results below to show you...")
+When recommending providers, you MUST:
+1. Provide a helpful explanation (2-3 sentences)
+2. **ALWAYS include a filters block** with relevant search criteria
 
-IMPORTANT: When you want to apply filters, end your response with a special JSON block using triple backticks:
+MANDATORY: Every response MUST end with a filters JSON block:
 \`\`\`filters
 {
-  "searchQuery": "search term",
-  "specialty": "specialty name",
-  "providerType": "Hospital|MedicalClinic|Physician|etc",
-  "insurance": "insurance name",
-  "location": "city name",
-  "emergency": true/false,
-  "rating": 4.0
+  "specialty": "exact specialty name from our list",
+  "insurance": "insurance provider if mentioned",
+  "location": "city if mentioned",
+  "providerType": "Hospital|MedicalClinic|Physician if relevant",
+  "rating": 4.0 (if user wants high quality)
 }
 \`\`\`
 
-Example response with filters:
-"Based on your knee pain and Blue Cross insurance, I recommend orthopedic specialists. Let me show you the best matches.
+Valid specialty values: Primary Care, Cardiology, Orthopedics, Neurology, Oncology, Pediatrics, Dermatology, Mental Health, Emergency
+Valid locations: Utica, Rome, New Hartford, Oneida, Clinton
+Valid insurance: Blue Cross, Aetna, UnitedHealthcare, Cigna, Medicaid, Medicare, Humana
+
+Example 1 - User asks "I need a pediatrician":
+"I'll help you find pediatricians in Central New York. Let me show you the best-rated pediatric providers in your area.
+\`\`\`filters
+{
+  "specialty": "Pediatrics"
+}
+\`\`\`"
+
+Example 2 - User asks "I have Blue Cross and need help with knee pain":
+"Based on your knee pain, I recommend seeing an orthopedic specialist who accepts Blue Cross insurance. Let me filter to show you orthopedic providers.
 \`\`\`filters
 {
   "specialty": "Orthopedics",
   "insurance": "Blue Cross"
+}
+\`\`\`"
+
+Example 3 - User asks "Show me cardiologists in Utica":
+"I'll show you cardiologists practicing in Utica. These are heart specialists who can help with cardiovascular concerns.
+\`\`\`filters
+{
+  "specialty": "Cardiology",
+  "location": "Utica"
 }
 \`\`\`"
 
@@ -167,6 +185,8 @@ export async function POST(request: NextRequest) {
     const completion = await response.json()
     const assistantMessage = completion.choices[0]?.message?.content || 'I apologize, but I was unable to generate a response. Please try again.'
 
+    console.log('🤖 AI Response:', assistantMessage)
+
     // Parse filters from response
     let filters = null
     let cleanedMessage = assistantMessage
@@ -175,11 +195,15 @@ export async function POST(request: NextRequest) {
     if (filterMatch && filterMatch[1]) {
       try {
         filters = JSON.parse(filterMatch[1].trim())
+        console.log('✅ Parsed filters:', filters)
         // Remove the filter block from the message
         cleanedMessage = assistantMessage.replace(/```filters\s*[\s\S]*?```/, '').trim()
       } catch (e) {
-        console.error('Failed to parse filters:', e)
+        console.error('❌ Failed to parse filters:', e)
+        console.error('Filter string was:', filterMatch[1])
       }
+    } else {
+      console.warn('⚠️ No filter block found in AI response')
     }
 
     return NextResponse.json({ 

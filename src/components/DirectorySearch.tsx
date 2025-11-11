@@ -153,7 +153,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
   // Apply AI-generated filters
   useEffect(() => {
     if (aiFilters) {
-      console.log('Applying AI filters:', aiFilters)
+      console.log('🤖 Applying AI filters:', aiFilters)
       
       if (aiFilters.searchQuery) setSearchQuery(aiFilters.searchQuery)
       if (aiFilters.providerType) setSelectedCategory(aiFilters.providerType)
@@ -166,6 +166,8 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
       if (aiFilters.providerType || aiFilters.specialty || aiFilters.insurance || aiFilters.location || aiFilters.rating) {
         setShowFilters(true)
       }
+      
+      // The auto-search effect will trigger fetchProviders after state updates
     }
   }, [aiFilters])
 
@@ -361,6 +363,21 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
       fetchProviders()
     }
   }, [fetchProviders, initialProviders.length])
+
+  // Auto-search when filters change (except on initial load)
+  const isInitialMount = useRef(true)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+    } else {
+      // Debounce the search to avoid too many requests
+      const timeoutId = setTimeout(() => {
+        console.log('🔄 Filters changed, auto-searching...')
+        fetchProviders()
+      }, 300)
+      return () => clearTimeout(timeoutId)
+    }
+  }, [selectedCategory, selectedSpecialty, selectedInsurance, selectedLocation, minRating])
 
   const handleSearch = async () => {
     await fetchProviders()
