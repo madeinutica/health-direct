@@ -56,6 +56,26 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
                 )}
               </div>
             )}
+
+            {/* Insurance Badges */}
+            <div className="flex flex-wrap gap-1.5 mt-2">
+              {provider.acceptsMedicaid && (
+                <span className="text-caption px-2 py-0.5 rounded bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300">
+                  Medicaid
+                </span>
+              )}
+              {provider.acceptsMedicare && (
+                <span className="text-caption px-2 py-0.5 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+                  Medicare
+                </span>
+              )}
+              {provider.network && provider.network !== 'Independent' && (
+                <span className="text-caption px-2 py-0.5 rounded bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">
+                  {provider.network}
+                </span>
+              )}
+            </div>
+
           </div>
           
           {/* Chevron */}
