@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { MagnifyingGlassIcon, FunnelIcon, MapIcon, ListBulletIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon, FunnelIcon, MapIcon, ListBulletIcon, SparklesIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/24/solid'
 import { HealthcareProvider } from '@/types'
 import { createClient } from '@supabase/supabase-js'
@@ -112,12 +112,25 @@ function ProviderCard({ provider, onClick, onMapClick }: ProviderCardProps) {
 interface DirectorySearchProps {
   onSearchResults?: (providers: HealthcareProvider[]) => void
   initialProviders?: HealthcareProvider[]
+  aiFilters?: {
+    searchQuery?: string
+    specialty?: string
+    providerType?: string
+    insurance?: string
+    location?: string
+    emergency?: boolean
+    rating?: number
+  } | null
+  onFiltersCleared?: () => void
 }
 
-export default function DirectorySearch({ onSearchResults, initialProviders = [] }: DirectorySearchProps) {
+export default function DirectorySearch({ onSearchResults, initialProviders = [], aiFilters, onFiltersCleared }: DirectorySearchProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedSpecialty, setSelectedSpecialty] = useState('all')
+  const [selectedInsurance, setSelectedInsurance] = useState('all')
+  const [selectedLocation, setSelectedLocation] = useState('all')
+  const [minRating, setMinRating] = useState(0)
   const [showFilters, setShowFilters] = useState(false)
   const [viewMode, setViewMode] = useState<ViewMode>('list')
   const [providers, setProviders] = useState<HealthcareProvider[]>(initialProviders)
@@ -136,6 +149,25 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
   useEffect(() => {
     onSearchResultsRef.current = onSearchResults
   }, [onSearchResults])
+
+  // Apply AI-generated filters
+  useEffect(() => {
+    if (aiFilters) {
+      console.log('Applying AI filters:', aiFilters)
+      
+      if (aiFilters.searchQuery) setSearchQuery(aiFilters.searchQuery)
+      if (aiFilters.providerType) setSelectedCategory(aiFilters.providerType)
+      if (aiFilters.specialty) setSelectedSpecialty(aiFilters.specialty)
+      if (aiFilters.insurance) setSelectedInsurance(aiFilters.insurance)
+      if (aiFilters.location) setSelectedLocation(aiFilters.location)
+      if (aiFilters.rating) setMinRating(aiFilters.rating)
+      
+      // Auto-open filters if AI set them
+      if (aiFilters.providerType || aiFilters.specialty || aiFilters.insurance || aiFilters.location || aiFilters.rating) {
+        setShowFilters(true)
+      }
+    }
+  }, [aiFilters])
 
   const categories = [
     { id: 'all', label: 'All Providers' },
@@ -159,13 +191,36 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
     { id: 'Mental Health', label: 'Mental Health' },
   ]
 
+  const insuranceOptions = [
+    { id: 'all', label: 'All Insurance' },
+    { id: 'Blue Cross', label: 'Blue Cross Blue Shield' },
+    { id: 'Aetna', label: 'Aetna' },
+    { id: 'UnitedHealthcare', label: 'UnitedHealthcare' },
+    { id: 'Cigna', label: 'Cigna' },
+    { id: 'Medicaid', label: 'Medicaid' },
+    { id: 'Medicare', label: 'Medicare' },
+    { id: 'Humana', label: 'Humana' },
+  ]
+
+  const locationOptions = [
+    { id: 'all', label: 'All Locations' },
+    { id: 'Utica', label: 'Utica' },
+    { id: 'Rome', label: 'Rome' },
+    { id: 'New Hartford', label: 'New Hartford' },
+    { id: 'Oneida', label: 'Oneida' },
+    { id: 'Clinton', label: 'Clinton' },
+  ]
+
   const fetchProviders = useCallback(async () => {
     setLoading(true)
     try {
       console.log('🔍 Fetching providers with filters:', {
         searchQuery,
         selectedCategory,
-        selectedSpecialty
+        selectedSpecialty,
+        selectedInsurance,
+        selectedLocation,
+        minRating
       })
 
       let query = supabase.from('healthcare_providers').select('*')
@@ -182,6 +237,20 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
       if (selectedSpecialty && selectedSpecialty !== 'all') {
         // Use contains for array search with correct column name
         query = query.contains('medical_specialty', [selectedSpecialty])
+      }
+
+      if (selectedInsurance && selectedInsurance !== 'all') {
+        // Filter by insurance accepted
+        query = query.contains('accepts_insurance', [selectedInsurance])
+      }
+
+      if (selectedLocation && selectedLocation !== 'all') {
+        // Filter by city/location
+        query = query.ilike('address->0->addressLocality', `%${selectedLocation}%`)
+      }
+
+      if (minRating > 0) {
+        query = query.gte('rating', minRating)
       }
 
       console.log('🔍 Executing Supabase query...')
@@ -283,7 +352,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
     } finally {
       setLoading(false)
     }
-  }, [searchQuery, selectedCategory, selectedSpecialty, supabase]) // Include supabase since it's memoized and stable
+  }, [searchQuery, selectedCategory, selectedSpecialty, selectedInsurance, selectedLocation, minRating, supabase]) // Include all filter dependencies
 
   // Single useEffect for all data fetching
   useEffect(() => {
@@ -316,6 +385,32 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
     <div className="bg-white">
       {/* Search Bar */}
       <div className="max-w-6xl mx-auto p-6">
+        {/* AI Filter Badge */}
+        {aiFilters && Object.keys(aiFilters).length > 0 && (
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <SparklesIcon className="h-5 w-5 text-blue-600" />
+              <p className="text-sm font-medium text-blue-900">
+                AI Assistant applied filters based on your conversation
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setSearchQuery('')
+                setSelectedCategory('all')
+                setSelectedSpecialty('all')
+                setSelectedInsurance('all')
+                setSelectedLocation('all')
+                setMinRating(0)
+                onFiltersCleared?.()
+              }}
+              className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+            >
+              Clear
+            </button>
+          </div>
+        )}
+
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4">
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Main Search Input */}
@@ -379,7 +474,7 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
           {/* Filters */}
           {showFilters && (
             <div className="mt-4 pt-4 border-t border-gray-100">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Provider Type
@@ -412,6 +507,73 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
                       </option>
                     ))}
                   </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Insurance Accepted
+                  </label>
+                  <select
+                    value={selectedInsurance}
+                    onChange={(e) => setSelectedInsurance(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  >
+                    {insuranceOptions.map((insurance) => (
+                      <option key={insurance.id} value={insurance.id}>
+                        {insurance.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Location
+                  </label>
+                  <select
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  >
+                    {locationOptions.map((location) => (
+                      <option key={location.id} value={location.id}>
+                        {location.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Minimum Rating
+                  </label>
+                  <select
+                    value={minRating}
+                    onChange={(e) => setMinRating(Number(e.target.value))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  >
+                    <option value={0}>All Ratings</option>
+                    <option value={3}>3+ Stars</option>
+                    <option value={4}>4+ Stars</option>
+                    <option value={4.5}>4.5+ Stars</option>
+                  </select>
+                </div>
+
+                <div className="flex items-end">
+                  <button
+                    onClick={() => {
+                      setSearchQuery('')
+                      setSelectedCategory('all')
+                      setSelectedSpecialty('all')
+                      setSelectedInsurance('all')
+                      setSelectedLocation('all')
+                      setMinRating(0)
+                      onFiltersCleared?.()
+                    }}
+                    className="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                  >
+                    Clear All Filters
+                  </button>
                 </div>
               </div>
             </div>

@@ -48,6 +48,28 @@ When recommending providers, be specific and use this structure:
 - Explain WHY each provider is a good match (specialty, location, insurance, ratings)
 - Provide actionable next steps (e.g., "I can filter the results below to show you...")
 
+IMPORTANT: When you want to apply filters, end your response with a special JSON block using triple backticks:
+\`\`\`filters
+{
+  "searchQuery": "search term",
+  "specialty": "specialty name",
+  "providerType": "Hospital|MedicalClinic|Physician|etc",
+  "insurance": "insurance name",
+  "location": "city name",
+  "emergency": true/false,
+  "rating": 4.0
+}
+\`\`\`
+
+Example response with filters:
+"Based on your knee pain and Blue Cross insurance, I recommend orthopedic specialists. Let me show you the best matches.
+\`\`\`filters
+{
+  "specialty": "Orthopedics",
+  "insurance": "Blue Cross"
+}
+\`\`\`"
+
 AVAILABLE PROVIDERS SAMPLE (use these in recommendations):
 ${providerData.slice(0, 15).map(p => 
   `- ${p.name} (${p.type}) - Specialties: ${(p.medical_specialty || []).slice(0, 3).join(', ')} - Location: ${
@@ -145,8 +167,24 @@ export async function POST(request: NextRequest) {
     const completion = await response.json()
     const assistantMessage = completion.choices[0]?.message?.content || 'I apologize, but I was unable to generate a response. Please try again.'
 
+    // Parse filters from response
+    let filters = null
+    let cleanedMessage = assistantMessage
+    
+    const filterMatch = assistantMessage.match(/```filters\s*([\s\S]*?)```/)
+    if (filterMatch && filterMatch[1]) {
+      try {
+        filters = JSON.parse(filterMatch[1].trim())
+        // Remove the filter block from the message
+        cleanedMessage = assistantMessage.replace(/```filters\s*[\s\S]*?```/, '').trim()
+      } catch (e) {
+        console.error('Failed to parse filters:', e)
+      }
+    }
+
     return NextResponse.json({ 
-      message: assistantMessage,
+      message: cleanedMessage,
+      filters,
       providersCount: providerData.length 
     })
 

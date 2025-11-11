@@ -1,9 +1,19 @@
 'use client'
 
-import { useState, Suspense, useEffect } from 'react'
+import { useState, Suspense, useEffect, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { PaperAirplaneIcon, SparklesIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import DirectorySearch from '@/components/DirectorySearch'
+
+interface AIFilters {
+  searchQuery?: string
+  specialty?: string
+  providerType?: string
+  insurance?: string
+  location?: string
+  emergency?: boolean
+  rating?: number
+}
 
 function DirectoryContent() {
   const searchParams = useSearchParams()
@@ -15,6 +25,7 @@ function DirectoryContent() {
   const [conversationHistory, setConversationHistory] = useState<Array<{ type: 'user' | 'assistant', content: string }>>([])
   const [isLoading, setIsLoading] = useState(false)
   const [showChatModal, setShowChatModal] = useState(false)
+  const [aiFilters, setAiFilters] = useState<AIFilters | null>(null)
 
   // Initialize conversation with homepage data
   useEffect(() => {
@@ -54,6 +65,12 @@ function DirectoryContent() {
       if (response.ok) {
         const data = await response.json()
         setConversationHistory(prev => [...prev, { type: 'assistant', content: data.message }])
+        
+        // Apply AI-generated filters
+        if (data.filters) {
+          console.log('AI returned filters:', data.filters)
+          setAiFilters(data.filters)
+        }
       } else {
         throw new Error('Failed to get response')
       }
@@ -122,7 +139,10 @@ function DirectoryContent() {
       </div>
 
       {/* Directory Search Component with Results */}
-      <DirectorySearch />
+      <DirectorySearch 
+        aiFilters={aiFilters}
+        onFiltersCleared={() => setAiFilters(null)}
+      />
 
       {/* Chat Modal */}
       {showChatModal && (
