@@ -13,9 +13,11 @@ module.exports = {
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
+          500: '#3a8dcd',
+          600: '#2d7ab8',
+          700: '#1a3a60',
+          dark: '#1a3a60',
+          light: '#3a8dcd',
         },
         gray: {
           50: '#f9fafb',
@@ -23,7 +25,7 @@ module.exports = {
           200: '#e5e7eb',
           300: '#d1d5db',
           400: '#9ca3af',
-          500: '#6b7280',
+          500: '#7a7a7a',
           600: '#4b5563',
           700: '#374151',
           800: '#1f2937',
@@ -31,7 +33,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Montserrat', 'system-ui', 'sans-serif'],
       },
       spacing: {
         '18': '4.5rem',

@@ -2,11 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-dark: #1a3a60;
+  --primary-light: #3a8dcd;
+  --text-gray: #7a7a7a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,7 +22,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 
 @layer base {
