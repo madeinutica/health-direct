@@ -119,7 +119,7 @@ export default function CommunityPage() {
     <div className="min-h-screen">
       {/* Header */}
       <div className="bg-white border-b border-gray-100">
-        <div className="px-4 py-6 text-center">
+        <div className="px-4 py-6 text-center mx-auto max-w-7xl">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             Community
           </h1>
@@ -136,7 +136,7 @@ export default function CommunityPage() {
         </div>
       </div>
 
-      <div className="px-4 py-4">
+      <div className="px-4 py-4 mx-auto max-w-7xl">
         <div className="space-y-6">
           {/* Categories - Mobile Horizontal Scroll */}
           <div className="bg-white rounded-lg border border-gray-200 p-4">
