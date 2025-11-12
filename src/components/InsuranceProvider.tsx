@@ -200,7 +200,7 @@ export function InsuranceSelection({ onSave, onClose }: InsuranceSelectionProps)
                 <div className="flex items-start space-x-2">
                   <InformationCircleIcon className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
                   <div className="text-sm text-blue-700">
-                    <strong>Why this matters:</strong> We'll use this to show you providers that accept your insurance and help you avoid surprise bills.
+                    <strong>Why this matters:</strong> We&apos;ll use this to show you providers that accept your insurance and help you avoid surprise bills.
                   </div>
                 </div>
               </div>
@@ -290,7 +290,7 @@ export function InsuranceSelection({ onSave, onClose }: InsuranceSelectionProps)
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-gray-900">I don't know my plan</span>
+                  <span className="font-medium text-gray-900">I don&apos;t know my plan</span>
                   {selectedPlan === '' && (
                     <CheckCircleSolidIcon className="h-5 w-5 text-primary-600" />
                   )}

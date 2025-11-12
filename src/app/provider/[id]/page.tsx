@@ -90,7 +90,7 @@ export default function ProviderDetailPage() {
         <div className="text-center px-4">
           <div className="text-5xl mb-4">❌</div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Provider Not Found</h2>
-          <p className="text-gray-600 mb-6">The provider you're looking for doesn't exist.</p>
+          <p className="text-gray-600 mb-6">The provider you&apos;re looking for doesn&apos;t exist.</p>
           <button
             onClick={() => router.push('/directory')}
             className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
