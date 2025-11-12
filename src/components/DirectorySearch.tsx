@@ -155,10 +155,59 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
     if (aiFilters) {
       console.log('🤖 Applying AI filters:', aiFilters)
       
-      if (aiFilters.searchQuery) setSearchQuery(aiFilters.searchQuery)
+      // Parse search query for specialty keywords
+      if (aiFilters.searchQuery) {
+        const queryLower = aiFilters.searchQuery.toLowerCase()
+        
+        // Check for specialty keywords in search query
+        if (queryLower.includes('pediatric') || queryLower.includes('pediatrician') || queryLower.includes('child')) {
+          setSelectedSpecialty('Pediatrics')
+        } else if (queryLower.includes('heart') || queryLower.includes('cardiolog')) {
+          setSelectedSpecialty('Cardiology')
+        } else if (queryLower.includes('knee') || queryLower.includes('orthoped') || queryLower.includes('bone') || queryLower.includes('joint')) {
+          setSelectedSpecialty('Orthopedics')
+        } else if (queryLower.includes('skin') || queryLower.includes('dermatolog')) {
+          setSelectedSpecialty('Dermatology')
+        } else if (queryLower.includes('mental') || queryLower.includes('anxiety') || queryLower.includes('depression') || queryLower.includes('therapy')) {
+          setSelectedSpecialty('Mental Health')
+        } else if (queryLower.includes('primary care') || queryLower.includes('family doctor') || queryLower.includes('general practitioner')) {
+          setSelectedSpecialty('Primary Care')
+        } else if (queryLower.includes('emergency') || queryLower.includes('urgent')) {
+          setSelectedSpecialty('Emergency')
+        } else if (queryLower.includes('cancer') || queryLower.includes('oncolog')) {
+          setSelectedSpecialty('Oncology')
+        } else if (queryLower.includes('brain') || queryLower.includes('neurolog')) {
+          setSelectedSpecialty('Neurology')
+        }
+        
+        setSearchQuery(aiFilters.searchQuery)
+      }
+      
       if (aiFilters.providerType) setSelectedCategory(aiFilters.providerType)
       if (aiFilters.specialty) setSelectedSpecialty(aiFilters.specialty)
-      if (aiFilters.insurance) setSelectedInsurance(aiFilters.insurance)
+      
+      // Normalize insurance names to match our dropdown options
+      if (aiFilters.insurance) {
+        const normalizedInsurance = aiFilters.insurance.toLowerCase()
+        if (normalizedInsurance.includes('blue cross')) {
+          setSelectedInsurance('Blue Cross')
+        } else if (normalizedInsurance.includes('medicaid')) {
+          setSelectedInsurance('Medicaid')
+        } else if (normalizedInsurance.includes('medicare')) {
+          setSelectedInsurance('Medicare')
+        } else if (normalizedInsurance.includes('aetna')) {
+          setSelectedInsurance('Aetna')
+        } else if (normalizedInsurance.includes('united')) {
+          setSelectedInsurance('UnitedHealthcare')
+        } else if (normalizedInsurance.includes('cigna')) {
+          setSelectedInsurance('Cigna')
+        } else if (normalizedInsurance.includes('humana')) {
+          setSelectedInsurance('Humana')
+        } else {
+          setSelectedInsurance(aiFilters.insurance)
+        }
+      }
+      
       if (aiFilters.location) setSelectedLocation(aiFilters.location)
       if (aiFilters.rating) setMinRating(aiFilters.rating)
       
@@ -243,7 +292,10 @@ export default function DirectorySearch({ onSearchResults, initialProviders = []
 
       if (selectedInsurance && selectedInsurance !== 'all') {
         // Filter by insurance accepted
-        query = query.contains('accepts_insurance', [selectedInsurance])
+        // "Most Insurance Plans" should match all providers
+        if (selectedInsurance !== 'Most Insurance Plans') {
+          query = query.contains('accepts_insurance', [selectedInsurance])
+        }
       }
 
       if (selectedLocation && selectedLocation !== 'all') {
