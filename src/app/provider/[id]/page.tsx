@@ -149,18 +149,19 @@ export default function ProviderDetailPage() {
         {/* Rating Badge */}
         {provider.rating && (
           <div className="absolute top-4 left-4 bg-white/95 backdrop-blur rounded-lg px-3 py-2 shadow-lg">
-          <div className="flex items-center space-x-1">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <StarSolidIcon
-                key={star}
-                className="h-4 w-4 text-yellow-400"
-              />
-            ))}
+            <div className="flex items-center space-x-1">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <StarSolidIcon
+                  key={star}
+                  className="h-4 w-4 text-yellow-400"
+                />
+              ))}
+            </div>
+            <div className="text-sm font-bold text-gray-900 mt-1">
+              {provider.rating} <span className="font-normal text-gray-600">({provider.reviewCount}) reviews</span>
+            </div>
           </div>
-          <div className="text-sm font-bold text-gray-900 mt-1">
-            {provider.rating} <span className="font-normal text-gray-600">({provider.reviewCount}) reviews</span>
-          </div>
-        </div>
+        )}
 
         {/* Image Count Badge */}
         <div className="absolute top-4 right-4 bg-white/95 backdrop-blur rounded-lg px-3 py-2 shadow-lg flex items-center space-x-2">
